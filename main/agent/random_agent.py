@@ -2,7 +2,8 @@ import random
 
 from main.carcassonne_game_state import CarcassonneGameState, GamePhase
 from main.objects.meeple_action import MeepleAction
-from main.utils.game_state_updater import draw_tile, play_tile, play_meeple, next_player
+from main.utils.game_state_updater import draw_tile, play_tile, play_meeple, next_player, \
+    remove_meeples_and_update_score
 from main.utils.possible_move_finder import possible_meeple_actions
 from main.utils.tile_positions import PlayingPosition, possible_playing_positions
 
@@ -13,7 +14,8 @@ class RandomCarcassonneAgent:
         if game_state.phase == GamePhase.TILES:
             return self.play_random_tile(game_state)
         elif game_state.phase == GamePhase.MEEPLES:
-            return self.play_random_meeple(game_state)
+            new_game_state = self.play_random_meeple(game_state)
+            return remove_meeples_and_update_score(new_game_state)
 
     def play_random_tile(self, game_state: CarcassonneGameState):
         playing_positions = possible_playing_positions(game_state, game_state.next_tile)
