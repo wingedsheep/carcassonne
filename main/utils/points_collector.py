@@ -11,6 +11,7 @@ from main.objects.meeple_position import MeeplePosition
 from main.objects.meeple_type import MeepleType
 from main.objects.road import Road
 from main.objects.side import Side
+from main.objects.terrain_type import TerrainType
 from main.objects.tile import Tile
 from main.utils.city_util import CityUtil
 from main.utils.meeple_util import MeepleUtil
