@@ -1,7 +1,10 @@
 import unittest
 
 from main.carcassonne_game_state import CarcassonneGameState
+from main.carcassonne_visualiser import CarcassonneVisualiser
+from main.decks import inns_and_cathedrals_deck
 from main.decks.base_deck import base_tiles
+from main.decks.inns_and_cathedrals_deck import inns_and_cathedrals_tiles
 from main.objects.city import City
 from main.objects.coordinate import Coordinate
 from main.objects.coordinate_with_side import CoordinateWithSide
@@ -129,3 +132,33 @@ class TestCityUtil(unittest.TestCase):
         game_state.board[2][1] = city_narrow_left_right
         game_state.board[2][2] = city_diagonal_top_left
         return game_state
+
+    def test_find_cities(self):
+        """
+        Find cities left and right
+        """
+
+        # Given
+        city_util: CityUtil = CityUtil()
+        game_state: CarcassonneGameState = CarcassonneGameState()
+
+        city_one_side_straight_road = base_tiles["city_one_side_straight_road"].turn(3)
+        city_with_road = inns_and_cathedrals_tiles["ic_15"].turn(3)
+
+        game_state.board = [[None for column in range(2)] for row in range(1)]
+
+        game_state.board[0][0] = city_with_road
+        game_state.board[0][1] = city_one_side_straight_road
+
+        CarcassonneVisualiser().draw_game_state(game_state)
+
+        # When
+        cities: [City] = city_util.find_cities(
+            game_state=game_state,
+            coordinate=Coordinate(0, 0)
+        )
+
+        # Then
+        self.assertEqual(1, len(cities))
+        self.assertEqual(2, len(cities[0].city_positions))
+        self.assertTrue(cities[0].finished)

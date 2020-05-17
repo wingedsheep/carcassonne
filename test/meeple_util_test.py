@@ -13,7 +13,7 @@ from main.utils.city_util import CityUtil
 from main.utils.meeple_util import MeepleUtil
 
 
-class TestCityUtil(unittest.TestCase):
+class TestMeepleUtil(unittest.TestCase):
 
     def test_find_meeples_in_donut_city(self):
         """

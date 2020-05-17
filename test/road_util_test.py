@@ -2,18 +2,14 @@ import unittest
 
 from main.carcassonne_game_state import CarcassonneGameState
 from main.decks.base_deck import base_tiles
-from main.objects.city import City
 from main.objects.coordinate import Coordinate
 from main.objects.coordinate_with_side import CoordinateWithSide
-from main.objects.meeple_position import MeeplePosition
-from main.objects.meeple_type import MeepleType
 from main.objects.road import Road
 from main.objects.side import Side
-from main.utils.city_util import CityUtil
 from main.utils.road_util import RoadUtil
 
 
-class TestCityUtil(unittest.TestCase):
+class TestRoadUtil(unittest.TestCase):
 
     def test_find_road(self):
         """

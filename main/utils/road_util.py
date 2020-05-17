@@ -28,7 +28,7 @@ class RoadUtil:
                                       Side.RIGHT)
 
     def find_road(self, game_state: CarcassonneGameState, road_position: CoordinateWithSide) -> Road:
-        roads: set[CoordinateWithSide] = set(self.outgoing_roads_for_position(game_state, road_position))
+        roads: Set[CoordinateWithSide] = set(self.outgoing_roads_for_position(game_state, road_position))
         open_connections: Set[CoordinateWithSide] = set(map(lambda x: self.opposite_edge(x), roads))
         explored: Set[CoordinateWithSide] = roads.union(open_connections)
         while len(open_connections) > 0:
@@ -48,7 +48,7 @@ class RoadUtil:
 
     def outgoing_roads_for_position(self, game_state: CarcassonneGameState, road_position: CoordinateWithSide) -> [
         CoordinateWithSide]:
-        tile: Tile = game_state.board[road_position.coordinate.row][road_position.coordinate.column]
+        tile: Tile = game_state.get_tile(road_position.coordinate.row, road_position.coordinate.column)
         if tile is None:
             return []
 
@@ -87,7 +87,7 @@ class RoadUtil:
         return meeples
 
     def find_roads(self, game_state: CarcassonneGameState, coordinate: Coordinate):
-        roads: [Road] = []
+        roads: Set[Road] = set()
 
         tile: Tile = game_state.board[coordinate.row][coordinate.column]
 
@@ -99,6 +99,6 @@ class RoadUtil:
             if tile.get_type(side) == TerrainType.ROAD:
                 road: Road = self.find_road(game_state=game_state,
                                             road_position=CoordinateWithSide(coordinate=coordinate, side=side))
-                roads.append(road)
+                roads.add(road)
 
-        return roads
+        return list(roads)

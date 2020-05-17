@@ -25,10 +25,10 @@ class PointsCollector:
         self.road_util = road_util
         self.meeple_util = meeple_util
 
-    def remove_meeples_and_collect_points(self, game_state: CarcassonneGameState, last_played_coordinate: Coordinate):
+    def remove_meeples_and_collect_points(self, game_state: CarcassonneGameState, coordinate: Coordinate):
 
         # Points for finished cities
-        cities: [City] = self.city_util.find_cities(game_state=game_state, coordinate=last_played_coordinate)
+        cities: [City] = self.city_util.find_cities(game_state=game_state, coordinate=coordinate)
         for city in cities:
             if city.finished:
                 meeples: [[MeeplePosition]] = self.city_util.find_meeples(game_state=game_state, city=city)
@@ -42,7 +42,7 @@ class PointsCollector:
                 self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples)
 
         # Points for finished roads
-        roads: [Road] = self.road_util.find_roads(game_state=game_state, coordinate=last_played_coordinate)
+        roads: [Road] = self.road_util.find_roads(game_state=game_state, coordinate=coordinate)
         for road in roads:
             if road.finished:
                 meeples: [[MeeplePosition]] = self.road_util.find_meeples(game_state=game_state, road=road)
@@ -56,9 +56,9 @@ class PointsCollector:
                 self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples)
 
         # Points for finished chapels
-        for row in range(last_played_coordinate.row - 1, last_played_coordinate.row + 2):
-            for column in range(last_played_coordinate.column - 1, last_played_coordinate.column + 2):
-                tile: Tile = game_state.board[row][column]
+        for row in range(coordinate.row - 1, coordinate.row + 2):
+            for column in range(coordinate.column - 1, coordinate.column + 2):
+                tile: Tile = game_state.get_tile(row, column)
 
                 if tile is None:
                     continue

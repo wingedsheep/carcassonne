@@ -48,8 +48,8 @@ def play_meeple(game_state: CarcassonneGameState, meeple_action: MeepleAction) -
     elif meeple_action.meeple_type == MeepleType.BIG or meeple_action.meeple_type == MeepleType.BIG_FARMER:
         new_game_state.big_meeples[game_state.current_player] += 1 if meeple_action.remove else -1
 
-    if new_game_state.last_played_tile is not None:
-        points_collector.remove_meeples_and_collect_points(game_state=new_game_state, last_played_coordinate=new_game_state.last_played_tile[1].coordinate)
+    if new_game_state.last_played_tile is not None and new_game_state.last_played_tile[1] is not None:
+        points_collector.remove_meeples_and_collect_points(game_state=new_game_state, coordinate=new_game_state.last_played_tile[1].coordinate)
 
     return new_game_state
 

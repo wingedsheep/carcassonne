@@ -37,6 +37,14 @@ class CarcassonneGameState:
         self.last_played_tile: (Tile, PlayingPosition) = None
         self.last_river_rotation: Rotation = Rotation.NONE
 
+    def get_tile(self, row: int, column: int):
+        if row < 0 or column < 0:
+            return None
+        elif row >= len(self.board) or column >= len(self.board[0]):
+            return None
+        else:
+            return self.board[row][column]
+
     def empty_board(self):
         for row in self.board:
             for column in row:
