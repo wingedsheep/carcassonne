@@ -5,18 +5,24 @@ Carcassonne implementation in python
 
 ## API (work in progress)
 
-The following is how it is supposed to work once the code is finished. 
-
 Code example for a game with two players
 
-    carcassonne_game = CarcassonneGame(
-	    players=2, 
-	    tile_sets=[TileSets.BASE, TileSets.THE_RIVER, TileSets.INNS_AND_CATHEDRALS]
-	)
-	
-	while not game.finished():
-		player: int = carcassonne_game.state.current_player
-		valid_actions: [Action] = carcassonne_game.get_possible_actions()
-		action: Optional[Action] = # Choose an action
-		if action is not None:
-			carcassonne_game.play(player, action)
+    import random  
+    from typing import Optional  
+      
+    from main.carcassonne_game import CarcassonneGame  
+    from main.objects.actions.action import Action  
+    from main.tile_sets.tile_sets import TileSet  
+      
+    game = CarcassonneGame(  
+        players=2,  
+        tile_sets=[TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS]  
+    )  
+      
+    while not game.is_finished():  
+        player: int = game.state.current_player  
+        valid_actions: [Action] = game.get_possible_actions()  
+        action: Optional[Action] = random.choice(valid_actions)  
+        if action is not None:  
+            game.step(player, action)  
+        game.render()
