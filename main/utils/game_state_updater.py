@@ -1,6 +1,6 @@
 import copy
 from main.carcassonne_game_state import CarcassonneGameState, GamePhase
-from main.objects.meeple_action import MeepleAction
+from main.objects.actions.meeple_action import MeepleAction
 from main.objects.meeple_position import MeeplePosition
 from main.objects.meeple_type import MeepleType
 from main.objects.rotation import Rotation
@@ -10,7 +10,7 @@ from main.utils.meeple_util import MeepleUtil
 from main.utils.points_collector import PointsCollector
 from main.utils.river_rotation_util import get_river_rotation_tile
 from main.utils.road_util import RoadUtil
-from main.utils.tile_positions import PlayingPosition
+from main.utils.tile_position_finder import PlayingPosition
 
 points_collector: PointsCollector = PointsCollector(city_util=CityUtil(), road_util=RoadUtil(), meeple_util=MeepleUtil())
 
@@ -31,24 +31,6 @@ def update_last_played_river_rotation(game_state, new_game_state, turned_tile):
                                                            new_tile=turned_tile)
         if river_rotation != Rotation.NONE:
             new_game_state.last_river_rotation = river_rotation
-
-
-def play_meeple(game_state: CarcassonneGameState, meeple_action: MeepleAction) -> CarcassonneGameState:
-    new_game_state = copy.deepcopy(game_state)
-
-    if not meeple_action.remove:
-        new_game_state.placed_meeples[game_state.current_player].append(MeeplePosition(meeple_type=meeple_action.meeple_type, coordinate_with_side=meeple_action.coordinate_with_side))
-    else:
-        new_game_state.placed_meeples[game_state.current_player].remove(MeeplePosition(meeple_type=meeple_action.meeple_type, coordinate_with_side=meeple_action.coordinate_with_side))
-
-    if meeple_action.meeple_type == MeepleType.NORMAL or meeple_action.meeple_type == MeepleType.FARMER:
-        new_game_state.meeples[game_state.current_player] += 1 if meeple_action.remove else -1
-    elif meeple_action.meeple_type == MeepleType.ABBOT:
-        new_game_state.abbots[game_state.current_player] += 1 if meeple_action.remove else -1
-    elif meeple_action.meeple_type == MeepleType.BIG or meeple_action.meeple_type == MeepleType.BIG_FARMER:
-        new_game_state.big_meeples[game_state.current_player] += 1 if meeple_action.remove else -1
-
-    return new_game_state
 
 def remove_meeples_and_update_score(game_state: CarcassonneGameState):
     new_game_state = copy.deepcopy(game_state)

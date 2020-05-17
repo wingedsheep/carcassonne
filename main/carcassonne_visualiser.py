@@ -48,17 +48,17 @@ class CarcassonneVisualiser:
             for column_index, tile in enumerate(row):
                 tile: Tile
                 if tile is not None:
-                    self.draw_tile(column_index, row_index, tile)
+                    self.__draw_tile(column_index, row_index, tile)
 
         for player, placed_meeples in enumerate(game_state.placed_meeples):
             meeple_position: MeeplePosition
             for meeple_position in placed_meeples:
-                self.draw_meeple(player, meeple_position)
+                self.__draw_meeple(player, meeple_position)
 
         self.canvas.update()
 
-    def draw_meeple(self, player_index: int, meeple_position: MeeplePosition):
-        image = self.get_image(player=player_index, meeple_type=meeple_position.meeple_type)
+    def __draw_meeple(self, player_index: int, meeple_position: MeeplePosition):
+        image = self.__get_image(player=player_index, meeple_type=meeple_position.meeple_type)
         self.image_ref.append(image)
 
         if meeple_position.meeple_type == MeepleType.BIG:
@@ -75,7 +75,7 @@ class CarcassonneVisualiser:
             image=image
         )
 
-    def draw_tile(self, column_index, row_index, tile):
+    def __draw_tile(self, column_index, row_index, tile):
         image_filename = tile.image
         abs_file_path = os.path.join(self.images_path, image_filename)
 
@@ -89,7 +89,7 @@ class CarcassonneVisualiser:
         self.image_ref.append(photo_image)
         self.canvas.create_image(column_index * self.tile_size, row_index * self.tile_size, anchor=NW, image=photo_image)
 
-    def get_image(self, player: int, meeple_type: MeepleType):
+    def __get_image(self, player: int, meeple_type: MeepleType):
         icon_type = MeepleType.NORMAL
         if meeple_type == MeepleType.ABBOT:
             icon_type = meeple_type

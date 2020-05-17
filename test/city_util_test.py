@@ -2,9 +2,9 @@ import unittest
 
 from main.carcassonne_game_state import CarcassonneGameState
 from main.carcassonne_visualiser import CarcassonneVisualiser
-from main.decks import inns_and_cathedrals_deck
-from main.decks.base_deck import base_tiles
-from main.decks.inns_and_cathedrals_deck import inns_and_cathedrals_tiles
+from main.tile_sets import inns_and_cathedrals_deck
+from main.tile_sets.base_deck import base_tiles
+from main.tile_sets.inns_and_cathedrals_deck import inns_and_cathedrals_tiles
 from main.objects.city import City
 from main.objects.coordinate import Coordinate
 from main.objects.coordinate_with_side import CoordinateWithSide

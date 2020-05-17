@@ -2,7 +2,7 @@ import copy
 import unittest
 
 from main.carcassonne_game_state import CarcassonneGameState
-from main.decks.base_deck import base_tiles
+from main.tile_sets.base_deck import base_tiles
 from main.objects.city import City
 from main.objects.coordinate import Coordinate
 from main.objects.coordinate_with_side import CoordinateWithSide

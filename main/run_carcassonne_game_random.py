@@ -1,5 +1,5 @@
 from main.agent.random_agent import RandomCarcassonneAgent
-from main.carcassonne_game import CarcassonneGame
+from main.carcassonne_game_player import CarcassonneGame
 from main.carcassonne_visualiser import CarcassonneVisualiser
 
 

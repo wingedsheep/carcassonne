@@ -4,7 +4,7 @@ from main.carcassonne_game_state import CarcassonneGameState
 from main.objects.rotation import Rotation
 from main.objects.side import Side
 from main.objects.tile import Tile
-from main.utils.river_rotation_util import get_river_rotation_ends
+from main.utils.river_rotation_util import RiverRotationUtil
 
 
 def grass_fits(center: Tile, top: Tile = None, right: Tile = None, bottom: Tile = None, left: Tile = None) -> bool:
@@ -85,12 +85,12 @@ def rivers_fit(center: Tile, top: Tile = None, right: Tile = None, bottom: Tile 
     if connected_side is None:
         return False
 
-    if unconnected_side is not None and game_state.last_river_rotation is not Rotation.NONE and game_state.last_played_tile is not None:
-        last_played_tile: Tile = game_state.last_played_tile[0]
+    if unconnected_side is not None and game_state.last_river_rotation is not Rotation.NONE and game_state.last_tile_action is not None:
+        last_played_tile: Tile = game_state.last_tile_action.tile
         last_played_river_ends: Set[Side] = last_played_tile.get_river_ends()
         river_ends: Set[Side] = {connected_side, unconnected_side}
 
-        rotation: Rotation = get_river_rotation_ends(previous_river_ends=last_played_river_ends, river_ends=river_ends)
+        rotation: Rotation = RiverRotationUtil.get_river_rotation_ends(previous_river_ends=last_played_river_ends, river_ends=river_ends)
         if rotation == game_state.last_river_rotation:
             return False
 

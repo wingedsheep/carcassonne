@@ -1,11 +1,11 @@
 import random
 
 from main.carcassonne_game_state import CarcassonneGameState, GamePhase
-from main.objects.meeple_action import MeepleAction
+from main.objects.actions.meeple_action import MeepleAction
 from main.utils.game_state_updater import draw_tile, play_tile, play_meeple, next_player, \
     remove_meeples_and_update_score
 from main.utils.possible_move_finder import possible_meeple_actions
-from main.utils.tile_positions import PlayingPosition, possible_playing_positions
+from main.utils.tile_position_finder import PlayingPosition, possible_playing_positions
 
 
 class RandomCarcassonneAgent:

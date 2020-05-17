@@ -1,51 +1,36 @@
-from main.agent.random_agent import RandomCarcassonneAgent
 from main.carcassonne_game_state import CarcassonneGameState
 from main.carcassonne_visualiser import CarcassonneVisualiser
-from main.utils.city_util import CityUtil
-from main.utils.meeple_util import MeepleUtil
-from main.utils.points_collector import PointsCollector
-from main.utils.road_util import RoadUtil
+from main.objects.actions.action import Action
+from main.tile_sets.tile_sets import TileSet
+from main.utils.action_util import ActionUtil
+from main.utils.state_updater import StateUpdater
 
 
 class CarcassonneGame:
 
-    def __init__(self, players: [RandomCarcassonneAgent],
-                 visualiser: CarcassonneVisualiser):
+    def __init__(self,
+                 players: int = 2,
+                 tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)):
         self.players = players
-        self.visualiser = visualiser
+        self.tile_sets = tile_sets
+        self.state: CarcassonneGameState = CarcassonneGameState(tile_sets=tile_sets)
+        self.visualiser = CarcassonneVisualiser()
+        self.action_util = ActionUtil()
 
-    def play_game(self):
-        carcassonne_game_state: CarcassonneGameState = CarcassonneGameState()
-        while carcassonne_game_state.next_tile is not None:
-            print("Player", carcassonne_game_state.current_player, carcassonne_game_state.phase)
-            player = self.players[carcassonne_game_state.current_player]
-            carcassonne_game_state = player.act(carcassonne_game_state)
-            self.visualiser.draw_game_state(carcassonne_game_state)
-            self.print_state(carcassonne_game_state)
+    def reset(self):
+        self.state = CarcassonneGameState(tile_sets=self.tile_sets)
 
-        points_collector = PointsCollector(city_util=CityUtil(), road_util=RoadUtil(), meeple_util=MeepleUtil())
-        points_collector.count_final_scores(game_state=carcassonne_game_state)
-        self.print_state(carcassonne_game_state)
+    def step(self, player: int, action: Action):
+        self.state = StateUpdater.apply_action(game_state=self.state, action=action)
 
-    def print_state(self, carcassonne_game_state):
+    def render(self):
+        self.visualiser.draw_game_state(self.state)
 
-        print_object = {
-            "scores": {
-                "player 1": carcassonne_game_state.scores[0],
-                "player 2": carcassonne_game_state.scores[1]
-            },
-            "meeples": {
-                "player 1": {
-                    "normal": carcassonne_game_state.meeples[0],
-                    "abbots": carcassonne_game_state.abbots[0],
-                    "big": carcassonne_game_state.big_meeples[0]
-                },
-                "player 2": {
-                    "normal": carcassonne_game_state.meeples[1],
-                    "abbots": carcassonne_game_state.abbots[1],
-                    "big": carcassonne_game_state.big_meeples[1]
-                }
-            }
-        }
+    def is_finished(self) -> bool:
+        return self.state.is_terminated()
 
-        print(print_object)
+    def get_current_player(self) -> int:
+        return self.state.current_player
+
+    def get_possible_actions(self) -> [Action]:
+        return ActionUtil.get_possible_actions(self.state)
