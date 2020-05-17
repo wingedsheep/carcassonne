@@ -25,7 +25,7 @@ class GamePhase(Enum):
 
 class CarcassonneGameState:
 
-    def __init__(self, tile_sets: [TileSet]):
+    def __init__(self, tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)):
         self.deck = self.initialize_deck(tile_sets=tile_sets)
         self.board: [[Tile]] = [[None for i in range(41)] for i in range(41)]
         self.next_tile = self.deck.pop(0)
