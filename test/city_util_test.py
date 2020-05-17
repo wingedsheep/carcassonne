@@ -150,8 +150,6 @@ class TestCityUtil(unittest.TestCase):
         game_state.board[0][0] = city_with_road
         game_state.board[0][1] = city_one_side_straight_road
 
-        CarcassonneVisualiser().draw_game_state(game_state)
-
         # When
         cities: [City] = city_util.find_cities(
             game_state=game_state,
