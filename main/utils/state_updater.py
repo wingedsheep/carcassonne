@@ -39,6 +39,9 @@ class StateUpdater:
             StateUpdater.draw_tile(game_state=new_game_state)
             StateUpdater.next_player(game_state=new_game_state)
 
+        if new_game_state.is_terminated():
+            points_collector.count_final_scores(game_state=new_game_state)
+
         return new_game_state
 
     @staticmethod

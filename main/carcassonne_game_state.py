@@ -56,7 +56,7 @@ class CarcassonneGameState:
         return True
 
     def is_terminated(self) -> bool:
-        return False
+        return self.next_tile is None
 
     def initialize_deck(self, tile_sets: [TileSet]):
         deck: [Tile] = []

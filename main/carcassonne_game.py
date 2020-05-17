@@ -9,8 +9,8 @@ from main.utils.state_updater import StateUpdater
 class CarcassonneGame:
 
     def __init__(self,
-                 players: int = 2,
-                 tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)):
+                 players: object = 2,
+                 tile_sets: object = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)) -> object:
         self.players = players
         self.tile_sets = tile_sets
         self.state: CarcassonneGameState = CarcassonneGameState(tile_sets=tile_sets)
