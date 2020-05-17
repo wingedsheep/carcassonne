@@ -3,7 +3,7 @@ Carcassonne implementation in python
 
 ![Example game](https://github.com/wingedsheep/carcassonne/blob/master/example_game.gif)
 
-## API (work in progress)
+## API
 
 Code example for a game with two players
 
