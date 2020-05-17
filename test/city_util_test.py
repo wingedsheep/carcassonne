@@ -25,11 +25,7 @@ class TestCityUtil(unittest.TestCase):
         city_top = base_tiles["city_one_side"]
         city_bottom = city_top.turn(2)
 
-        game_state.board = []
-        for row in range(2):
-            game_state.board.append([])
-            for column in range(1):
-                game_state.board[row].append(None)
+        game_state.board = [[None for column in range(1)] for row in range(2)]
 
         game_state.board[0][0] = city_bottom
         game_state.board[1][0] = city_top
@@ -121,11 +117,9 @@ class TestCityUtil(unittest.TestCase):
         city_diagonal_bottom_right = base_tiles["city_diagonal_top_right"].turn(1)
         city_diagonal_bottom_left = base_tiles["city_diagonal_top_right"].turn(2)
         city_diagonal_top_left = base_tiles["city_diagonal_top_right"].turn(3)
-        game_state.board = []
-        for row in range(3):
-            game_state.board.append([])
-            for column in range(3):
-                game_state.board[row].append(None)
+
+        game_state.board = [[None for column in range(3)] for row in range(3)]
+
         game_state.board[0][0] = city_diagonal_bottom_right
         game_state.board[0][1] = city_narrow_left_right
         game_state.board[0][2] = city_diagonal_bottom_left

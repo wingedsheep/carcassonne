@@ -7,7 +7,7 @@ from main.utils.tile_fitter import fits
 
 def possible_playing_positions(game_state: CarcassonneGameState, tile_to_play: Tile) -> [PlayingPosition]:
     if game_state.empty_board():
-        return [PlayingPosition(coordinate=Coordinate(row=6, column=20), turns=0)]
+        return [PlayingPosition(coordinate=Coordinate(row=5, column=14), turns=0)]
 
     playing_positions = []
 

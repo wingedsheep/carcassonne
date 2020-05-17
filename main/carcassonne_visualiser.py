@@ -1,5 +1,4 @@
 import os
-import pkgutil
 from tkinter import *
 from PIL import ImageTk, Image
 from main.carcassonne_game_state import CarcassonneGameState
