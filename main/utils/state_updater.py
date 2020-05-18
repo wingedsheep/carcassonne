@@ -74,6 +74,9 @@ class StateUpdater:
         if meeple_action.meeple_type == MeepleType.NORMAL or meeple_action.meeple_type == MeepleType.FARMER:
             game_state.meeples[game_state.current_player] += 1 if meeple_action.remove else -1
         elif meeple_action.meeple_type == MeepleType.ABBOT:
+            if meeple_action.remove:
+                points = PointsCollector.chapel_or_flowers_points(game_state=game_state, coordinate=meeple_action.coordinate_with_side.coordinate)
+                game_state.scores[game_state.current_player] += points
             game_state.abbots[game_state.current_player] += 1 if meeple_action.remove else -1
         elif meeple_action.meeple_type == MeepleType.BIG or meeple_action.meeple_type == MeepleType.BIG_FARMER:
             game_state.big_meeples[game_state.current_player] += 1 if meeple_action.remove else -1
