@@ -49,7 +49,7 @@ game = CarcassonneGame(
 )
 
 while not game.is_finished():
-    player: int = game.state.current_player
+    player: int = game.get_current_player()
     valid_actions: [Action] = game.get_possible_actions()
     action: Optional[Action] = random.choice(valid_actions)
     if action is not None:
