@@ -33,7 +33,7 @@ def print_state(carcassonne_game_state: CarcassonneGameState):
 
 game = CarcassonneGame(
     players=2,
-    tile_sets=[TileSet.BASE]
+    tile_sets=[TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS]
 )
 
 while not game.is_finished():
@@ -42,7 +42,6 @@ while not game.is_finished():
     action: Optional[Action] = random.choice(valid_actions)
     if action is not None:
         game.step(player, action)
-        print_state(carcassonne_game_state=game.state)
     game.render()
 
 print_state(carcassonne_game_state=game.state)
