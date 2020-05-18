@@ -25,16 +25,20 @@ class GamePhase(Enum):
 
 class CarcassonneGameState:
 
-    def __init__(self, tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)):
+    def __init__(
+            self,
+            tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS),
+            players: int = 2
+    ):
         self.deck = self.initialize_deck(tile_sets=tile_sets)
-        self.board: [[Tile]] = [[None for i in range(41)] for i in range(41)]
+        self.board: [[Tile]] = [[None for column in range(41)] for row in range(41)]
         self.next_tile = self.deck.pop(0)
-        self.players = 2
-        self.meeples = [7, 7]
-        self.abbots = [1, 1]
-        self.big_meeples = [1, 1]
-        self.placed_meeples = [[], []]
-        self.scores: [int] = [0, 0]
+        self.players = players
+        self.meeples = [7 for _ in range(players + 1)]
+        self.abbots = [1 for _ in range(players + 1)]
+        self.big_meeples = [1 for _ in range(players + 1)]
+        self.placed_meeples = [[] for _ in range(players + 1)]
+        self.scores: [int] = [0 for _ in range(players + 1)]
         self.current_player = 0
         self.phase = GamePhase.TILES
         self.last_tile_action: Optional[TileAction] = None
