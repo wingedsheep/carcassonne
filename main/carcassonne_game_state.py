@@ -40,7 +40,7 @@ class CarcassonneGameState:
         self.players = players
         self.meeples = [7 for _ in range(players + 1)]
         self.abbots = [1 for _ in range(players + 1)]
-        self.big_meeples = [1 for _ in range(players + 1)]
+        self.big_meeples = [1 if TileSet.INNS_AND_CATHEDRALS in tile_sets else 0 for _ in range(players + 1)]
         self.placed_meeples = [[] for _ in range(players + 1)]
         self.scores: [int] = [0 for _ in range(players + 1)]
         self.current_player = 0
