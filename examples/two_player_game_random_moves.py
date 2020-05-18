@@ -4,6 +4,7 @@ from typing import Optional
 from main.carcassonne_game import CarcassonneGame
 from main.carcassonne_game_state import CarcassonneGameState
 from main.objects.actions.action import Action
+from main.objects.meeple_type import MeepleType
 from main.tile_sets.tile_sets import TileSet
 
 
@@ -15,14 +16,14 @@ def print_state(carcassonne_game_state: CarcassonneGameState):
         },
         "meeples": {
             "player 1": {
-                "normal": carcassonne_game_state.meeples[0],
-                "abbots": carcassonne_game_state.abbots[0],
-                "big": carcassonne_game_state.big_meeples[0]
+                "normal": str(carcassonne_game_state.meeples[0]) + " / " + str(carcassonne_game_state.meeples[0] + len(list(filter(lambda x: x.meeple_type == MeepleType.NORMAL, game.state.placed_meeples[0])))),
+                "abbots": str(carcassonne_game_state.abbots[0]) + " / " + str(carcassonne_game_state.abbots[0] + len(list(filter(lambda x: x.meeple_type == MeepleType.ABBOT, game.state.placed_meeples[0])))),
+                "big": str(carcassonne_game_state.big_meeples[0]) + " / " + str(carcassonne_game_state.big_meeples[0] + len(list(filter(lambda x: x.meeple_type == MeepleType.BIG, game.state.placed_meeples[0]))))
             },
             "player 2": {
-                "normal": carcassonne_game_state.meeples[1],
-                "abbots": carcassonne_game_state.abbots[1],
-                "big": carcassonne_game_state.big_meeples[1]
+                "normal": str(carcassonne_game_state.meeples[1]) + " / " + str(carcassonne_game_state.meeples[1] + len(list(filter(lambda x: x.meeple_type == MeepleType.NORMAL, game.state.placed_meeples[1])))),
+                "abbots": str(carcassonne_game_state.abbots[1]) + " / " + str(carcassonne_game_state.abbots[1] + len(list(filter(lambda x: x.meeple_type == MeepleType.ABBOT, game.state.placed_meeples[1])))),
+                "big": str(carcassonne_game_state.big_meeples[1]) + " / " + str(carcassonne_game_state.big_meeples[1] + len(list(filter(lambda x: x.meeple_type == MeepleType.BIG, game.state.placed_meeples[1]))))
             }
         }
     }
@@ -32,7 +33,7 @@ def print_state(carcassonne_game_state: CarcassonneGameState):
 
 game = CarcassonneGame(
     players=2,
-    tile_sets=[TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS]
+    tile_sets=[TileSet.BASE]
 )
 
 while not game.is_finished():
@@ -41,6 +42,7 @@ while not game.is_finished():
     action: Optional[Action] = random.choice(valid_actions)
     if action is not None:
         game.step(player, action)
+        print_state(carcassonne_game_state=game.state)
     game.render()
 
 print_state(carcassonne_game_state=game.state)
