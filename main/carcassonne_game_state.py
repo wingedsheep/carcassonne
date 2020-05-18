@@ -3,6 +3,7 @@ from enum import Enum
 from typing import Optional
 
 from main.objects.actions.tile_action import TileAction
+from main.objects.coordinate import Coordinate
 from main.tile_sets.base_deck import base_tile_counts, base_tiles
 from main.tile_sets.inns_and_cathedrals_deck import inns_and_cathedrals_tile_counts, inns_and_cathedrals_tiles
 from main.tile_sets.the_river_deck import the_river_tiles, the_river_tile_counts
@@ -28,10 +29,13 @@ class CarcassonneGameState:
     def __init__(
             self,
             tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS),
-            players: int = 2
+            players: int = 2,
+            board_size: (int, int) = (35, 35),
+            starting_position: Coordinate = Coordinate(6, 15)
     ):
         self.deck = self.initialize_deck(tile_sets=tile_sets)
-        self.board: [[Tile]] = [[None for column in range(41)] for row in range(41)]
+        self.board: [[Tile]] = [[None for column in range(board_size[1])] for row in range(board_size[0])]
+        self.starting_position: Coordinate = starting_position
         self.next_tile = self.deck.pop(0)
         self.players = players
         self.meeples = [7 for _ in range(players + 1)]
