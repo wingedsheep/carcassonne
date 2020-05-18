@@ -23,7 +23,11 @@ class CarcassonneVisualiser:
         Side.RIGHT: (tile_size - (meeple_size / 2) - 3, tile_size / 2),
         Side.BOTTOM: (tile_size / 2, tile_size - (meeple_size / 2) - 3),
         Side.LEFT: ((meeple_size / 2) + 3, tile_size / 2),
-        Side.CENTER: (tile_size / 2, tile_size / 2)
+        Side.CENTER: (tile_size / 2, tile_size / 2),
+        Side.TOP_LEFT: (tile_size / 4, (meeple_size / 2) + 3),
+        Side.TOP_RIGHT: ((tile_size / 4) * 3, (meeple_size / 2) + 3),
+        Side.BOTTOM_LEFT: (tile_size / 4, tile_size - (meeple_size / 2) - 3),
+        Side.BOTTOM_RIGHT: ((tile_size / 4) * 3, tile_size - (meeple_size / 2) - 3)
     }
 
     big_meeple_position_offsets = {
@@ -31,7 +35,11 @@ class CarcassonneVisualiser:
         Side.RIGHT: (tile_size - (big_meeple_size / 2) - 3, tile_size / 2),
         Side.BOTTOM: (tile_size / 2, tile_size - (big_meeple_size / 2) - 3),
         Side.LEFT: ((big_meeple_size / 2) + 3, tile_size / 2),
-        Side.CENTER: (tile_size / 2, tile_size / 2)
+        Side.CENTER: (tile_size / 2, tile_size / 2),
+        Side.TOP_LEFT: (tile_size / 4, (big_meeple_size / 2) + 3),
+        Side.TOP_RIGHT: ((tile_size / 4) * 3, (big_meeple_size / 2) + 3),
+        Side.BOTTOM_LEFT: (tile_size / 4, tile_size - (big_meeple_size / 2) - 3),
+        Side.BOTTOM_RIGHT: ((tile_size / 4) * 3, tile_size - (big_meeple_size / 2) - 3)
     }
 
     def __init__(self):
@@ -102,4 +110,6 @@ class CarcassonneVisualiser:
         elif meeple_type == MeepleType.BIG:
             return ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS))
         elif meeple_type == MeepleType.FARMER:
+            return ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS).rotate(-90))
+        elif meeple_type == MeepleType.BIG_FARMER:
             return ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS).rotate(-90))

@@ -1,4 +1,6 @@
 from main.objects.connection import Connection
+from main.objects.farmer_connection import FarmerConnection
+from main.objects.farmer_side import FarmerSide
 from main.objects.side import Side
 from main.objects.tile import Tile
 
@@ -9,6 +11,22 @@ the_river_tiles = {
             Connection(Side.CENTER, Side.BOTTOM),
         ],
         grass=[Side.LEFT, Side.RIGHT, Side.TOP],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT,
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.TRT, FarmerSide.TRR,
+                    FarmerSide.BRR, FarmerSide.BRB,
+                    FarmerSide.BLB, FarmerSide.BLL
+                ]
+            )
+        ],
         image="River_III_C2_Tile_A.png"
     ),
     "river_city_with_road": Tile(

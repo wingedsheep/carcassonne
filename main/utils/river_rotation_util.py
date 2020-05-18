@@ -4,7 +4,7 @@ from main.carcassonne_game_state import CarcassonneGameState
 from main.objects.rotation import Rotation
 from main.objects.side import Side
 from main.objects.tile import Tile
-from main.utils.side_modification import opposite, turn_side
+from main.utils.side_modification_util import SideModificationUtil
 
 
 class RiverRotationUtil:
@@ -23,7 +23,7 @@ class RiverRotationUtil:
     @staticmethod
     def get_connecting_side(previous_river_sides: [Side], river_sides: [Side]) -> Optional[Side]:
         for side in river_sides:
-            if opposite(side) in previous_river_sides:
+            if SideModificationUtil.opposite_side(side) in previous_river_sides:
                 return side
         return None
 
@@ -38,9 +38,9 @@ class RiverRotationUtil:
         connecting_side: Side = RiverRotationUtil.get_connecting_side(previous_river_ends, river_ends)
         non_connecting_side: Side = river_ends.difference([connecting_side]).pop()
 
-        if turn_side(non_connecting_side, 1) == connecting_side:
+        if SideModificationUtil.turn_side(non_connecting_side, 1) == connecting_side:
             return Rotation.CLOCKWISE
-        elif turn_side(non_connecting_side, 3) == connecting_side:
+        elif SideModificationUtil.turn_side(non_connecting_side, 3) == connecting_side:
             return Rotation.COUNTER_CLOCKWISE
         else:
             return Rotation.NONE

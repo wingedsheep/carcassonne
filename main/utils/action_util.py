@@ -29,9 +29,7 @@ class ActionUtil:
                     actions.append(action)
         elif state.phase == GamePhase.MEEPLES:
             possible_meeple_actions = PossibleMoveFinder.possible_meeple_actions(game_state=state)
-            if len(possible_meeple_actions) == 0:
-                actions.append(PassAction())
-            else:
-                actions.extend(possible_meeple_actions)
+            actions.extend(possible_meeple_actions)
+            actions.append(PassAction())
         return actions
 

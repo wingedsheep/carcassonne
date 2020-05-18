@@ -43,5 +43,6 @@ while not game.is_finished():
     if action is not None:
         game.step(player, action)
     game.render()
+    i = 0
 
 print_state(carcassonne_game_state=game.state)

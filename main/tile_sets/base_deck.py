@@ -1,6 +1,8 @@
 from main.objects.connection import Connection
+from main.objects.farmer_connection import FarmerConnection
 from main.objects.side import Side
 from main.objects.tile import Tile
+from main.objects.farmer_side import FarmerSide
 
 base_tiles = {
     "chapel_with_road": Tile(
@@ -8,11 +10,43 @@ base_tiles = {
         road=[Connection(Side.BOTTOM, Side.CENTER)],
         grass=[Side.LEFT, Side.TOP, Side.RIGHT],
         chapel_or_flowers=True,
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT,
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.TRT, FarmerSide.TRR,
+                    FarmerSide.BRR, FarmerSide.BRB,
+                    FarmerSide.BLB, FarmerSide.BLL
+                ]
+            )
+        ],
         image="Base_Game_C2_Tile_A.jpg"
     ),
     "chapel": Tile(
         description="chapel",
         grass=[Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT,
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.TRT, FarmerSide.TRR,
+                    FarmerSide.BRR, FarmerSide.BRB,
+                    FarmerSide.BLB, FarmerSide.BLL
+                ]
+            )
+        ],
         chapel_or_flowers=True,
         image="Base_Game_C2_Tile_B.jpg"
     ),
@@ -26,6 +60,31 @@ base_tiles = {
         description="city_with_straight_road",
         road=[Connection(Side.LEFT, Side.RIGHT)],
         city=[[Side.TOP]],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.TRT, FarmerSide.TRR
+                ],
+                city_sides=[
+                    Side.TOP
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRR, FarmerSide.BRB,
+                    FarmerSide.BLB, FarmerSide.BLL
+                ]
+            )
+        ],
         grass=[Side.BOTTOM],
         image="Base_Game_C2_Tile_D.jpg"
     ),
@@ -33,12 +92,59 @@ base_tiles = {
         description="city_top",
         city=[[Side.TOP]],
         grass=[Side.RIGHT, Side.BOTTOM, Side.LEFT],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT,
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL,
+                    FarmerSide.TRR,
+                    FarmerSide.BRR, FarmerSide.BRB,
+                    FarmerSide.BLB, FarmerSide.BLL
+                ],
+                city_sides=[
+                    Side.TOP
+                ]
+            )
+        ],
         image="Base_Game_C2_Tile_E.jpg"
     ),
     "city_narrow_shield": Tile(
         description="city_narrow_shield",
         city=[[Side.LEFT, Side.RIGHT]],
         grass=[Side.TOP, Side.BOTTOM],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLT,
+                    FarmerSide.TRT
+                ],
+                city_sides=[
+                    Side.LEFT, Side.RIGHT
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRB,
+                    FarmerSide.BLB
+                ],
+                city_sides=[
+                    Side.LEFT, Side.RIGHT
+                ]
+            )
+        ],
         shield=True,
         image="Base_Game_C2_Tile_F.jpg"
     ),
@@ -46,18 +152,85 @@ base_tiles = {
         description="city_narrow",
         city=[[Side.LEFT, Side.RIGHT]],
         grass=[Side.TOP, Side.BOTTOM],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLT,
+                    FarmerSide.TRT
+                ],
+                city_sides=[
+                    Side.LEFT, Side.RIGHT
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRB,
+                    FarmerSide.BLB
+                ],
+                city_sides=[
+                    Side.LEFT, Side.RIGHT
+                ]
+            )
+        ],
         image="Base_Game_C2_Tile_G.jpg"
     ),
     "city_left_right": Tile(
         description="city_left_right",
         city=[[Side.LEFT], [Side.RIGHT]],
         grass=[Side.TOP, Side.BOTTOM, Side.CENTER],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT,
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLT,
+                    FarmerSide.TRT,
+                    FarmerSide.BRB,
+                    FarmerSide.BLB,
+                ],
+                city_sides=[
+                    Side.LEFT,
+                    Side.RIGHT
+                ]
+            )
+        ],
         image="Base_Game_C2_Tile_H.jpg"
     ),
     "city_top_right": Tile(
         description="city_top_right",
         city=[[Side.TOP], [Side.RIGHT]],
         grass=[Side.LEFT, Side.BOTTOM, Side.CENTER],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT,
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL,
+                    FarmerSide.BRB,
+                    FarmerSide.BLB, FarmerSide.BLL
+                ],
+                city_sides=[
+                    Side.TOP,
+                    Side.RIGHT
+                ]
+            )
+        ],
         image="Base_Game_C2_Tile_I.jpg"
     ),
     "city_top_road_bend_right": Tile(
