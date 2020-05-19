@@ -3,6 +3,13 @@ Carcassonne implementation in python
 
 ![Example game](https://github.com/wingedsheep/carcassonne/blob/master/example_game.gif)
 
+## Features
+
+* Tilesets 
+    * Base game
+    * The river
+    * Inns and cathedrals
+
 ## API
 
 Code example for a game with two players
