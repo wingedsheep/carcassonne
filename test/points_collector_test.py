@@ -8,10 +8,7 @@ from main.objects.coordinate_with_side import CoordinateWithSide
 from main.objects.meeple_position import MeeplePosition
 from main.objects.meeple_type import MeepleType
 from main.objects.side import Side
-from main.utils.city_util import CityUtil
-from main.utils.meeple_util import MeepleUtil
 from main.utils.points_collector import PointsCollector
-from main.utils.road_util import RoadUtil
 
 
 class TestPointsCollector(unittest.TestCase):
@@ -22,7 +19,6 @@ class TestPointsCollector(unittest.TestCase):
         """
 
         # Given
-        points_collector: PointsCollector = PointsCollector(city_util=CityUtil(), road_util=RoadUtil(), meeple_util=MeepleUtil())
         game_state: CarcassonneGameState = CarcassonneGameState()
 
         city_one_side_straight_road = base_tiles["city_one_side_straight_road"].turn(3)
@@ -40,7 +36,7 @@ class TestPointsCollector(unittest.TestCase):
         game_state.placed_meeples[1].append(MeeplePosition(meeple_type=MeepleType.NORMAL, coordinate_with_side=CoordinateWithSide(Coordinate(0, 1), Side.BOTTOM)))
 
         # When
-        points_collector.remove_meeples_and_collect_points(game_state=game_state, coordinate=Coordinate(0, 0))
+        PointsCollector.remove_meeples_and_collect_points(game_state=game_state, coordinate=Coordinate(0, 0))
 
         # Then
         self.assertEqual(0, len(game_state.placed_meeples[0]))
@@ -54,7 +50,6 @@ class TestPointsCollector(unittest.TestCase):
         """
 
         # Given
-        points_collector: PointsCollector = PointsCollector(city_util=CityUtil(), road_util=RoadUtil(), meeple_util=MeepleUtil())
         game_state: CarcassonneGameState = CarcassonneGameState()
 
         city_one_side_straight_road = base_tiles["city_one_side_straight_road"].turn(3)
@@ -72,7 +67,7 @@ class TestPointsCollector(unittest.TestCase):
         game_state.placed_meeples[1].append(MeeplePosition(meeple_type=MeepleType.NORMAL, coordinate_with_side=CoordinateWithSide(Coordinate(0, 1), Side.BOTTOM)))
 
         # When
-        points_collector.remove_meeples_and_collect_points(game_state=game_state, coordinate=Coordinate(0, 1))
+        PointsCollector.remove_meeples_and_collect_points(game_state=game_state, coordinate=Coordinate(0, 1))
 
         # Then
         self.assertEqual(0, len(game_state.placed_meeples[0]))

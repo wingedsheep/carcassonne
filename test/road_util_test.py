@@ -17,7 +17,6 @@ class TestRoadUtil(unittest.TestCase):
         """
 
         # Given
-        road_util: RoadUtil = RoadUtil()
         game_state: CarcassonneGameState = CarcassonneGameState()
 
         crossroads = base_tiles["crossroads"]
@@ -28,7 +27,7 @@ class TestRoadUtil(unittest.TestCase):
         game_state.board[1][0] = crossroads
 
         # When
-        road: Road = road_util.find_road(
+        road: Road = RoadUtil.find_road(
             game_state=game_state,
             road_position=CoordinateWithSide(Coordinate(0, 0), Side.BOTTOM)
         )

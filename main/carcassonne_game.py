@@ -9,13 +9,12 @@ from main.utils.state_updater import StateUpdater
 class CarcassonneGame:
 
     def __init__(self,
-                 players: object = 2,
-                 tile_sets: object = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)):
+                 players: int = 2,
+                 tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)):
         self.players = players
         self.tile_sets = tile_sets
         self.state: CarcassonneGameState = CarcassonneGameState(tile_sets=tile_sets, players=players)
         self.visualiser = CarcassonneVisualiser()
-        self.action_util = ActionUtil()
 
     def reset(self):
         self.state = CarcassonneGameState(tile_sets=self.tile_sets)

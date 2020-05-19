@@ -7,13 +7,8 @@ from main.objects.actions.pass_action import PassAction
 from main.objects.actions.tile_action import TileAction
 from main.objects.meeple_position import MeeplePosition
 from main.objects.meeple_type import MeepleType
-from main.utils.city_util import CityUtil
-from main.utils.meeple_util import MeepleUtil
 from main.utils.points_collector import PointsCollector
 from main.utils.river_rotation_util import RiverRotationUtil
-from main.utils.road_util import RoadUtil
-
-points_collector: PointsCollector = PointsCollector(city_util=CityUtil(), meeple_util=MeepleUtil(), road_util=RoadUtil())
 
 
 class StateUpdater:
@@ -40,7 +35,7 @@ class StateUpdater:
             StateUpdater.next_player(game_state=new_game_state)
 
         if new_game_state.is_terminated():
-            points_collector.count_final_scores(game_state=new_game_state)
+            PointsCollector.count_final_scores(game_state=new_game_state)
 
         return new_game_state
 
@@ -56,7 +51,8 @@ class StateUpdater:
     def play_tile(game_state: CarcassonneGameState, tile_action: TileAction) -> CarcassonneGameState:
         game_state.board[tile_action.coordinate.row][tile_action.coordinate.column] = tile_action.tile
         game_state.phase = GamePhase.MEEPLES
-        game_state.last_river_rotation = RiverRotationUtil.get_river_rotation(game_state=game_state, tile=tile_action.tile)
+        game_state.last_river_rotation = RiverRotationUtil.get_river_rotation(game_state=game_state,
+                                                                              tile=tile_action.tile)
         game_state.last_tile_action = tile_action
         return game_state
 
@@ -75,7 +71,8 @@ class StateUpdater:
             game_state.meeples[game_state.current_player] += 1 if meeple_action.remove else -1
         elif meeple_action.meeple_type == MeepleType.ABBOT:
             if meeple_action.remove:
-                points = PointsCollector.chapel_or_flowers_points(game_state=game_state, coordinate=meeple_action.coordinate_with_side.coordinate)
+                points = PointsCollector.chapel_or_flowers_points(game_state=game_state,
+                                                                  coordinate=meeple_action.coordinate_with_side.coordinate)
                 game_state.scores[game_state.current_player] += points
             game_state.abbots[game_state.current_player] += 1 if meeple_action.remove else -1
         elif meeple_action.meeple_type == MeepleType.BIG or meeple_action.meeple_type == MeepleType.BIG_FARMER:
@@ -94,6 +91,6 @@ class StateUpdater:
     @staticmethod
     def remove_meeples_and_update_score(game_state: CarcassonneGameState) -> CarcassonneGameState:
         if game_state.last_tile_action is not None and game_state.last_tile_action.tile is not None:
-            points_collector.remove_meeples_and_collect_points(game_state=game_state,
-                                                               coordinate=game_state.last_tile_action.coordinate)
+            PointsCollector.remove_meeples_and_collect_points(game_state=game_state,
+                                                              coordinate=game_state.last_tile_action.coordinate)
         return game_state

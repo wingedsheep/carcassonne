@@ -3,13 +3,11 @@ import unittest
 
 from main.carcassonne_game_state import CarcassonneGameState
 from main.tile_sets.base_deck import base_tiles
-from main.objects.city import City
 from main.objects.coordinate import Coordinate
 from main.objects.coordinate_with_side import CoordinateWithSide
 from main.objects.meeple_position import MeeplePosition
 from main.objects.meeple_type import MeepleType
 from main.objects.side import Side
-from main.utils.city_util import CityUtil
 from main.utils.meeple_util import MeepleUtil
 
 
@@ -21,7 +19,6 @@ class TestMeepleUtil(unittest.TestCase):
         """
 
         # Given
-        meeple_util: MeepleUtil = MeepleUtil()
         game_state: CarcassonneGameState = self.create_donut_city_board()
         game_state.placed_meeples = [[], []]
 
@@ -39,7 +36,7 @@ class TestMeepleUtil(unittest.TestCase):
         meeples_to_remove[1].append(copy.deepcopy(meeple_1_1))
 
         # When
-        meeple_util.remove_meeples(game_state=game_state, meeples=meeples_to_remove)
+        MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples_to_remove)
 
         # Then
         self.assertEqual(1, len(game_state.placed_meeples[0]))

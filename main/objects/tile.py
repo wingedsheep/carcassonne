@@ -4,10 +4,10 @@ from typing import Set
 import numpy as np
 
 from main.objects.connection import Connection
+from main.objects.farmer_connection import FarmerConnection
 from main.objects.side import Side
 from main.objects.terrain_type import TerrainType
-from main.utils.connection_modification import turn_connection
-from main.utils.side_modification import turn_side, turn_sides
+from main.utils.side_modification_util import SideModificationUtil
 
 np.set_printoptions(suppress=True, linewidth=np.nan, threshold=sys.maxsize)
 
@@ -20,6 +20,7 @@ class Tile:
                  river: [Connection] = (),
                  city: [[Side]] = (),
                  grass: [Side] = (),
+                 farms: [FarmerConnection] = (),
                  shield: bool = False,
                  chapel_or_flowers: bool = False,
                  inn: [Side] = (),
@@ -32,6 +33,7 @@ class Tile:
         self.river = river
         self.city = city
         self.grass = grass
+        self.farms: [FarmerConnection] = farms
         self.shield = shield
         self.chapel_or_flowers = chapel_or_flowers
         self.inn = inn
@@ -89,6 +91,7 @@ class Tile:
             "road": list(map(lambda x: x.to_json(), self.road)),
             "city": list(map(lambda x: x.to_json(), self.city)),
             "grass": list(map(lambda x: x.to_json(), self.grass)),
+            "farms": list(map(lambda x: x.to_json(), self.farms)),
             "shield": self.shield,
             "chapel_or_flowers": self.chapel_or_flowers,
             "inn": list(map(lambda x: x.to_json(), self.inn)),
@@ -102,13 +105,14 @@ class Tile:
         return Tile(
             description=self.description,
             turns=times,
-            road=list(map(lambda x: turn_connection(x, times), self.road)),
-            river=list(map(lambda x: turn_connection(x, times), self.river)),
-            city=list(map(lambda x: turn_sides(x, times), self.city)),
-            grass=list(map(lambda x: turn_side(x, times), self.grass)),
+            road=list(map(lambda x: SideModificationUtil.turn_connection(x, times), self.road)),
+            river=list(map(lambda x: SideModificationUtil.turn_connection(x, times), self.river)),
+            city=list(map(lambda x: SideModificationUtil.turn_sides(x, times), self.city)),
+            grass=list(map(lambda x: SideModificationUtil.turn_side(x, times), self.grass)),
+            farms=list(map(lambda x: SideModificationUtil.turn_farmer_connection(x, times), self.farms)),
             shield=self.shield,
             chapel_or_flowers=self.chapel_or_flowers,
-            inn=list(map(lambda x: turn_side(x, times), self.inn)),
-            unplayable_sides=list(map(lambda x: turn_side(x, times), self.unplayable_sides)),
+            inn=list(map(lambda x: SideModificationUtil.turn_side(x, times), self.inn)),
+            unplayable_sides=list(map(lambda x: SideModificationUtil.turn_side(x, times), self.unplayable_sides)),
             image=self.image
         )

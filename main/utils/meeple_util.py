@@ -22,13 +22,6 @@ class MeepleUtil:
             for meeple_position in meeple_positions:
                 MeepleUtil.remove_meeple(game_state, meeple_position, player)
 
-    # @staticmethod
-    # def remove_meeples(game_state: CarcassonneGameState, meeples: [CoordinateWithSide]):
-    #     for player in game_state.players:
-    #         for meeple_position in game_state.placed_meeples[player]:
-    #             if meeple_position.coordinate_with_side in meeples:
-    #                 MeepleUtil.remove_meeple(game_state, meeple_position, player)
-
     @staticmethod
     def remove_meeple(game_state: CarcassonneGameState, meeple_position: MeeplePosition, player: int):
         game_state.placed_meeples[player].remove(meeple_position)
