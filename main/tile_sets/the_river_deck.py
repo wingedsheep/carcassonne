@@ -38,6 +38,46 @@ the_river_tiles = {
             Connection(Side.CENTER, Side.BOTTOM),
         ],
         city=[[Side.TOP]],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.BLB, FarmerSide.BLL
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRB, FarmerSide.BRR
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL
+                ],
+                city_sides=[
+                    Side.TOP
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TRR
+                ],
+                city_sides=[
+                    Side.TOP
+                ]
+            )
+        ],
         image="River_III_C2_Tile_B.png"
     ),
     "river_double_city": Tile(
@@ -46,6 +86,32 @@ the_river_tiles = {
             Connection(Side.LEFT, Side.RIGHT),
         ],
         city=[[Side.TOP], [Side.BOTTOM]],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT, Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BLL,
+                    FarmerSide.BRR
+                ],
+                city_sides=[
+                    Side.BOTTOM
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT, Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL,
+                    FarmerSide.TRR
+                ],
+                city_sides=[
+                    Side.TOP
+                ]
+            )
+        ],
         image="River_III_C2_Tile_C.png"
     ),
     "river_straight": Tile(
@@ -54,6 +120,26 @@ the_river_tiles = {
             Connection(Side.TOP, Side.BOTTOM),
         ],
         grass=[Side.LEFT, Side.RIGHT],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT, Side.BOTTOM_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.BLL, FarmerSide.BLB
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_RIGHT, Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TRR, FarmerSide.TRT,
+                    FarmerSide.BRR, FarmerSide.BRB
+                ]
+            )
+        ],
         image="River_III_C2_Tile_D.png"
     ),
     "river_diagonal_city": Tile(
@@ -62,6 +148,29 @@ the_river_tiles = {
             Connection(Side.LEFT, Side.BOTTOM),
         ],
         city=[[Side.TOP, Side.RIGHT]],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT, Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL,
+                    FarmerSide.BLB
+                ],
+                city_sides=[
+                    Side.TOP,
+                    Side.RIGHT
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.BLL, FarmerSide.BLB
+                ]
+            )
+        ],
         image="River_III_C2_Tile_E.png"
     ),
     "river_straight_2": Tile(
@@ -70,6 +179,26 @@ the_river_tiles = {
             Connection(Side.TOP, Side.BOTTOM),
         ],
         grass=[Side.LEFT, Side.RIGHT],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT, Side.BOTTOM_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.BLL, FarmerSide.BLB
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_RIGHT, Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TRR, FarmerSide.TRT,
+                    FarmerSide.BRR, FarmerSide.BRB
+                ]
+            )
+        ],
         image="River_III_C2_Tile_F.png"
     ),
     "river_bend": Tile(
@@ -78,6 +207,26 @@ the_river_tiles = {
             Connection(Side.TOP, Side.LEFT),
         ],
         grass=[Side.RIGHT, Side.BOTTOM],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_RIGHT, Side.BOTTOM_RIGHT, Side.BOTTOM_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.TRR, FarmerSide.TRT,
+                    FarmerSide.BRR, FarmerSide.BRB,
+                    FarmerSide.BLL, FarmerSide.BLB
+                ]
+            )
+        ],
         image="River_III_C2_Tile_G.png"
     ),
     "river_chapel": Tile(
@@ -89,6 +238,33 @@ the_river_tiles = {
             Connection(Side.CENTER, Side.BOTTOM)
         ],
         grass=[Side.TOP],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.BLL, FarmerSide.BLB
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRR, FarmerSide.BRB
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT, Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.TRR, FarmerSide.TRT
+                ]
+            )
+        ],
         chapel_or_flowers=True,
         image="River_III_C2_Tile_H.png"
     ),
@@ -100,6 +276,33 @@ the_river_tiles = {
         road=[
             Connection(Side.LEFT, Side.TOP),
         ],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRR, FarmerSide.BRB
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT, Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BLL, FarmerSide.BLB,
+                    FarmerSide.TRR, FarmerSide.TRT
+                ]
+            )
+        ],
         image="River_III_C2_Tile_I.png"
     ),
     "river_flowery_bend": Tile(
@@ -108,6 +311,26 @@ the_river_tiles = {
             Connection(Side.RIGHT, Side.BOTTOM),
         ],
         grass=[Side.LEFT, Side.TOP],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRR, FarmerSide.BRB
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT, Side.BOTTOM_LEFT, Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BLL, FarmerSide.BLB,
+                    FarmerSide.TRR, FarmerSide.TRT,
+                    FarmerSide.TLL, FarmerSide.TLT
+                ]
+            )
+        ],
         chapel_or_flowers=True,
         image="River_III_C2_Tile_J.png"
     ),
@@ -119,6 +342,40 @@ the_river_tiles = {
         road=[
             Connection(Side.LEFT, Side.RIGHT),
         ],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.BLB, FarmerSide.BLL
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.BRB, FarmerSide.BRR
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT
+                ]
+            ),
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TRR, FarmerSide.TRT
+                ]
+            )
+        ],
         image="River_III_C2_Tile_K.png"
     ),
     "river_end": Tile(
@@ -127,6 +384,22 @@ the_river_tiles = {
             Connection(Side.TOP, Side.CENTER),
         ],
         grass=[Side.LEFT, Side.RIGHT, Side.BOTTOM],
+        farms=[
+            FarmerConnection(
+                farmer_positions=[
+                    Side.TOP_LEFT,
+                    Side.TOP_RIGHT,
+                    Side.BOTTOM_LEFT,
+                    Side.BOTTOM_RIGHT
+                ],
+                tile_connections=[
+                    FarmerSide.TLL, FarmerSide.TLT,
+                    FarmerSide.TRT, FarmerSide.TRR,
+                    FarmerSide.BRR, FarmerSide.BRB,
+                    FarmerSide.BLB, FarmerSide.BLL
+                ]
+            )
+        ],
         image="River_I_C2_Tile_L.jpg"
     )
 }
