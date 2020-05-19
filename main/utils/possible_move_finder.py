@@ -11,6 +11,7 @@ from main.objects.meeple_type import MeepleType
 from main.objects.side import Side
 from main.objects.terrain_type import TerrainType
 from main.objects.tile import Tile
+from main.tile_sets.supplementary_rules import SupplementaryRule
 from main.utils.city_util import CityUtil
 from main.utils.farm_util import FarmUtil
 from main.utils.road_util import RoadUtil
@@ -28,7 +29,11 @@ class PossibleMoveFinder:
         possible_actions: [MeepleAction] = []
 
         meeple_positions = cls.__possible_meeple_positions(game_state=game_state)
-        farmer_positions = cls.__possible_farmer_position(game_state=game_state)
+
+        if SupplementaryRule.FARMERS in game_state.supplementary_rules:
+            farmer_positions = cls.__possible_farmer_position(game_state=game_state)
+        else:
+            farmer_positions = ()
 
         if game_state.meeples[current_player] > 0:
             possible_actions.extend(list(

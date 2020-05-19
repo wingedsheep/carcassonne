@@ -1,5 +1,4 @@
 import random
-from enum import Enum
 from typing import Optional
 
 from main.objects.actions.tile_action import TileAction
@@ -7,6 +6,7 @@ from main.objects.coordinate import Coordinate
 from main.objects.game_phase import GamePhase
 from main.tile_sets.base_deck import base_tile_counts, base_tiles
 from main.tile_sets.inns_and_cathedrals_deck import inns_and_cathedrals_tile_counts, inns_and_cathedrals_tiles
+from main.tile_sets.supplementary_rules import SupplementaryRule
 from main.tile_sets.the_river_deck import the_river_tiles, the_river_tile_counts
 from main.objects.rotation import Rotation
 from main.objects.tile import Tile
@@ -18,17 +18,19 @@ class CarcassonneGameState:
     def __init__(
             self,
             tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS),
+            supplementary_rules: [SupplementaryRule] = (SupplementaryRule.FARMERS, SupplementaryRule.ABBOTS),
             players: int = 2,
             board_size: (int, int) = (35, 35),
             starting_position: Coordinate = Coordinate(6, 15)
     ):
         self.deck = self.initialize_deck(tile_sets=tile_sets)
+        self.supplementary_rules: [SupplementaryRule] = supplementary_rules
         self.board: [[Tile]] = [[None for column in range(board_size[1])] for row in range(board_size[0])]
         self.starting_position: Coordinate = starting_position
         self.next_tile = self.deck.pop(0)
         self.players = players
         self.meeples = [7 for _ in range(players + 1)]
-        self.abbots = [1 for _ in range(players + 1)]
+        self.abbots = [1 if SupplementaryRule.ABBOTS in supplementary_rules else 0 for _ in range(players + 1)]
         self.big_meeples = [1 if TileSet.INNS_AND_CATHEDRALS in tile_sets else 0 for _ in range(players + 1)]
         self.placed_meeples = [[] for _ in range(players + 1)]
         self.scores: [int] = [0 for _ in range(players + 1)]

@@ -5,6 +5,7 @@ from main.carcassonne_game import CarcassonneGame
 from main.carcassonne_game_state import CarcassonneGameState
 from main.objects.actions.action import Action
 from main.objects.meeple_type import MeepleType
+from main.tile_sets.supplementary_rules import SupplementaryRule
 from main.tile_sets.tile_sets import TileSet
 
 
@@ -45,7 +46,8 @@ def print_state(carcassonne_game_state: CarcassonneGameState):
 
 game = CarcassonneGame(
     players=4,
-    tile_sets=[TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS]
+    tile_sets=[TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS],
+    supplementary_rules=[SupplementaryRule.ABBOTS]
 )
 
 while not game.is_finished():

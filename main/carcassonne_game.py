@@ -1,6 +1,7 @@
 from main.carcassonne_game_state import CarcassonneGameState
 from main.carcassonne_visualiser import CarcassonneVisualiser
 from main.objects.actions.action import Action
+from main.tile_sets.supplementary_rules import SupplementaryRule
 from main.tile_sets.tile_sets import TileSet
 from main.utils.action_util import ActionUtil
 from main.utils.state_updater import StateUpdater
@@ -10,14 +11,20 @@ class CarcassonneGame:
 
     def __init__(self,
                  players: int = 2,
-                 tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS)):
+                 tile_sets: [TileSet] = (TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS),
+                 supplementary_rules: [SupplementaryRule] = (SupplementaryRule.FARMERS, SupplementaryRule.ABBOTS)):
         self.players = players
         self.tile_sets = tile_sets
-        self.state: CarcassonneGameState = CarcassonneGameState(tile_sets=tile_sets, players=players)
+        self.supplementary_rules = supplementary_rules
+        self.state: CarcassonneGameState = CarcassonneGameState(
+            tile_sets=tile_sets,
+            players=players,
+            supplementary_rules=supplementary_rules
+        )
         self.visualiser = CarcassonneVisualiser()
 
     def reset(self):
-        self.state = CarcassonneGameState(tile_sets=self.tile_sets)
+        self.state = CarcassonneGameState(tile_sets=self.tile_sets, supplementary_rules=self.supplementary_rules)
 
     def step(self, player: int, action: Action):
         self.state = StateUpdater.apply_action(game_state=self.state, action=action)
