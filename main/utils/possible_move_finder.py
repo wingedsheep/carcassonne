@@ -108,8 +108,7 @@ class PossibleMoveFinder:
             if FarmUtil.has_meeples(game_state, farm):
                 continue
             else:
-                farmer_connection_with_coordinate: FarmerConnectionWithCoordinate
-                for farmer_connection_with_coordinate in farm.farmer_connections_with_coordinate:
-                    playing_positions.append(CoordinateWithSide(farmer_connection_with_coordinate.coordinate, farmer_connection_with_coordinate.farmer_connection.farmer_positions[0]))
+                farmer_position: Side = farmer_connection.farmer_positions[0]
+                playing_positions.append(CoordinateWithSide(last_played_position, farmer_position))
 
         return playing_positions
