@@ -12,18 +12,16 @@ from main.objects.tile import Tile
 
 class CityUtil:
 
-    def __init__(self):
-        pass
-
-    def find_city(self, game_state: CarcassonneGameState, city_position: CoordinateWithSide) -> City:
-        cities: Set[CoordinateWithSide] = set(self.cities_for_position(game_state, city_position))
-        open_edges: Set[CoordinateWithSide] = set(map(lambda x: self.opposite_edge(x), cities))
+    @classmethod
+    def find_city(cls, game_state: CarcassonneGameState, city_position: CoordinateWithSide) -> City:
+        cities: Set[CoordinateWithSide] = set(cls.cities_for_position(game_state, city_position))
+        open_edges: Set[CoordinateWithSide] = set(map(lambda x: cls.opposite_edge(x), cities))
         explored: Set[CoordinateWithSide] = cities.union(open_edges)
         while len(open_edges) > 0:
             open_edge: CoordinateWithSide = open_edges.pop()
-            new_cities = self.cities_for_position(game_state, open_edge)
+            new_cities = cls.cities_for_position(game_state, open_edge)
             cities = cities.union(new_cities)
-            new_open_edges = set(map(lambda x: self.opposite_edge(x), new_cities))
+            new_open_edges = set(map(lambda x: cls.opposite_edge(x), new_cities))
             explored = explored.union(new_cities)
             new_open_edge: CoordinateWithSide
             for new_open_edge in new_open_edges:
@@ -34,7 +32,8 @@ class CityUtil:
         finished: bool = len(explored) == len(cities)
         return City(city_positions=cities, finished=finished)
 
-    def opposite_edge(self, city_position: CoordinateWithSide):
+    @classmethod
+    def opposite_edge(cls, city_position: CoordinateWithSide):
         if city_position.side == Side.TOP:
             return CoordinateWithSide(Coordinate(city_position.coordinate.row - 1, city_position.coordinate.column),
                                       Side.BOTTOM)
@@ -48,7 +47,8 @@ class CityUtil:
             return CoordinateWithSide(Coordinate(city_position.coordinate.row, city_position.coordinate.column - 1),
                                       Side.RIGHT)
 
-    def cities_for_position(self, game_state: CarcassonneGameState, city_position: CoordinateWithSide):
+    @classmethod
+    def cities_for_position(cls, game_state: CarcassonneGameState, city_position: CoordinateWithSide):
         tile: Tile = game_state.board[city_position.coordinate.row][city_position.coordinate.column]
         cities = []
         if tile is None:
@@ -61,14 +61,16 @@ class CityUtil:
                     cities.append(city_position)
         return cities
 
-    def city_contains_meeples(self, game_state: CarcassonneGameState, city: City):
+    @classmethod
+    def city_contains_meeples(cls, game_state: CarcassonneGameState, city: City):
         for city_position in city.city_positions:
             for i in range(game_state.players):
                 if city_position in list(map(lambda x: x.coordinate_with_side, game_state.placed_meeples[i])):
                     return True
         return False
 
-    def find_meeples(self, game_state: CarcassonneGameState, city: City) -> [[MeeplePosition]]:
+    @classmethod
+    def find_meeples(cls, game_state: CarcassonneGameState, city: City) -> [[MeeplePosition]]:
         meeples: [[MeeplePosition]] = []
 
         for i in range(game_state.players):
@@ -83,7 +85,8 @@ class CityUtil:
 
         return meeples
 
-    def find_cities(self, game_state: CarcassonneGameState, coordinate: Coordinate):
+    @classmethod
+    def find_cities(cls, game_state: CarcassonneGameState, coordinate: Coordinate, sides: [Side] = (Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT)):
         cities: Set[City] = set()
 
         tile: Tile = game_state.board[coordinate.row][coordinate.column]
@@ -92,9 +95,9 @@ class CityUtil:
             return cities
 
         side: Side
-        for side in [Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT]:
+        for side in sides:
             if tile.get_type(side) == TerrainType.CITY:
-                city: City = self.find_city(game_state=game_state,
+                city: City = cls.find_city(game_state=game_state,
                                             city_position=CoordinateWithSide(coordinate=coordinate, side=side))
                 cities.add(city)
 

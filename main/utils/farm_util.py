@@ -16,8 +16,16 @@ from main.utils.side_modification_util import SideModificationUtil
 class FarmUtil:
 
     @classmethod
-    def find_farm(cls, game_state: CarcassonneGameState, farmer_connection_with_coordinate: FarmerConnectionWithCoordinate) -> Farm:
+    def find_farm_by_coordinate(cls, game_state: CarcassonneGameState, position: CoordinateWithSide):
+        tile: Tile = game_state.get_tile(position.coordinate.row, position.coordinate.column)
 
+        farmer_connection: FarmerConnection
+        for farmer_connection in tile.farms:
+            if position.side in farmer_connection.farmer_positions:
+                return cls.find_farm(game_state, FarmerConnectionWithCoordinate(farmer_connection, position.coordinate))
+
+    @classmethod
+    def find_farm(cls, game_state: CarcassonneGameState, farmer_connection_with_coordinate: FarmerConnectionWithCoordinate) -> Farm:
         farmer_connections_with_coordinate: [FarmerConnectionWithCoordinate] = {farmer_connection_with_coordinate}
         open_sides: Set[CoordinateWithFarmerSide] = set(map(lambda x: CoordinateWithFarmerSide(farmer_connection_with_coordinate.coordinate, x), farmer_connection_with_coordinate.farmer_connection.tile_connections))
         to_explore: Set[CoordinateWithFarmerSide] = set(map(lambda farmer_side: cls.opposite_edge(farmer_side), open_sides))
