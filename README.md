@@ -25,7 +25,8 @@ Code example for a game with two players
       
     game = CarcassonneGame(  
         players=2,  
-        tile_sets=[TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS]  
+        tile_sets=[TileSet.BASE, TileSet.THE_RIVER, TileSet.INNS_AND_CATHEDRALS],
+        supplementary_rules=[SupplementaryRule.ABBOTS, SupplementaryRule.FARMERS]
     )  
       
     while not game.is_finished():  
