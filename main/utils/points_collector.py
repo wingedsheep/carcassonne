@@ -70,7 +70,7 @@ class PointsCollector:
                 coordinate_with_side = CoordinateWithSide(coordinate=coordinate, side=Side.CENTER)
                 meeple_of_player = MeepleUtil.position_contains_meeple(game_state=game_state,
                                                                              coordinate_with_side=coordinate_with_side)
-                if tile.chapel_or_flowers and meeple_of_player is not None:
+                if (tile.chapel or tile.flowers) and meeple_of_player is not None:
                     points = cls.chapel_or_flowers_points(game_state=game_state, coordinate=coordinate)
                     if points == 9:
                         print("Chapel or flowers finished for player", str(meeple_of_player))
@@ -208,7 +208,7 @@ class PointsCollector:
                     MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples)
                     continue
 
-                if terrrain_type == TerrainType.CHAPEL_OR_FLOWERS:
+                if terrrain_type == TerrainType.CHAPEL or terrrain_type == TerrainType.FLOWERS:
                     points = cls.chapel_or_flowers_points(game_state=game_state,
                                                            coordinate=meeple_position.coordinate_with_side.coordinate)
                     print("Collecting points for unfinished chapel or flowers for player", str(player))

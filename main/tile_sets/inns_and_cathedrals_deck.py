@@ -1,3 +1,5 @@
+import os
+
 from main.objects.connection import Connection
 from main.objects.farmer_connection import FarmerConnection
 from main.objects.farmer_side import FarmerSide
@@ -24,8 +26,8 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_1.png",
-        shield=True
+        shield=True,
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_1.png")
     ),
     "ic_2": Tile(
         description="ic_2",
@@ -51,7 +53,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_2.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_2.png")
     ),
     "ic_3": Tile(
         description="ic_3",
@@ -83,7 +85,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_3.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_3.png")
     ),
     "ic_4": Tile(
         description="ic_4",
@@ -135,19 +137,19 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_4.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_4.png")
     ),
     "ic_5": Tile(
         description="ic_5",
         city=[[Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT]],
         cathedral=True,
-        image="inns_cathedrals_5.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_5.png")
     ),
     "ic_6": Tile(
         description="ic_6",
         city=[[Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT]],
         cathedral=True,
-        image="inns_cathedrals_6.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_6.png")
     ),
     "ic_7": Tile(
         description="ic_7",
@@ -166,7 +168,7 @@ inns_and_cathedrals_tiles = {
                 ]
             ),
         ],
-        image="inns_cathedrals_7.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_7.png")
     ),
     "ic_8": Tile(
         description="ic_8",
@@ -181,8 +183,8 @@ inns_and_cathedrals_tiles = {
                 ]
             ),
         ],
-        chapel_or_flowers=True,
-        image="inns_cathedrals_8.png"
+        flowers=True,
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_8.png")
     ),
     "ic_9": Tile(
         description="ic_9",
@@ -208,8 +210,8 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        chapel_or_flowers=True,
-        image="inns_cathedrals_9.png"
+        flowers=True,
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_9.png")
     ),
     "ic_10": Tile(
         description="ic_10",
@@ -239,7 +241,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_10.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_10.png")
     ),
     "ic_11": Tile(
         description="ic_11",
@@ -271,7 +273,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_11.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_11.png")
     ),
     "ic_12": Tile(
         description="ic_12",
@@ -303,7 +305,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_12.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_12.png")
     ),
     "ic_13": Tile(
         description="ic_13",
@@ -335,7 +337,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_13.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_13.png")
     ),
     "ic_14": Tile(
         description="ic_14",
@@ -364,7 +366,7 @@ inns_and_cathedrals_tiles = {
             )
         ],
         shield=True,
-        image="inns_cathedrals_14.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_14.png")
     ),
     "ic_15": Tile(
         description="ic_15",
@@ -397,7 +399,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_15.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_15.png")
     ),
     "ic_16": Tile(
         description="ic_16",
@@ -449,7 +451,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_16.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_16.png")
     ),
     "ic_17": Tile(
         description="ic_17",
@@ -475,8 +477,8 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        chapel_or_flowers=True,
-        image="inns_cathedrals_17.png"
+        chapel=True,
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_17.png")
     ),
     "ic_18": Tile(
         description="ic_18",
@@ -514,7 +516,7 @@ inns_and_cathedrals_tiles = {
                 ]
             )
         ],
-        image="inns_cathedrals_18.png"
+        image=os.path.join("inns_and_cathedrals", "inns_cathedrals_18.png")
     )
 }
 

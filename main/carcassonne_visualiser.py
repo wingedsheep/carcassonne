@@ -86,7 +86,6 @@ class CarcassonneVisualiser:
     def __draw_tile(self, column_index, row_index, tile):
         image_filename = tile.image
         abs_file_path = os.path.join(self.images_path, image_filename)
-
         image = Image.open(abs_file_path).resize((self.tile_size, self.tile_size), Image.ANTIALIAS).rotate(-90 * tile.turns)
         height = image.height
         width = image.width

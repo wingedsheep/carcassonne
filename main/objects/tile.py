@@ -22,7 +22,8 @@ class Tile:
                  grass: [Side] = (),
                  farms: [FarmerConnection] = (),
                  shield: bool = False,
-                 chapel_or_flowers: bool = False,
+                 chapel: bool = False,
+                 flowers: bool = False,
                  inn: [Side] = (),
                  cathedral: bool = False,
                  unplayable_sides: [Side] = (),
@@ -35,7 +36,8 @@ class Tile:
         self.grass = grass
         self.farms: [FarmerConnection] = farms
         self.shield = shield
-        self.chapel_or_flowers = chapel_or_flowers
+        self.chapel = chapel
+        self.flowers = flowers
         self.inn = inn
         self.cathedral = cathedral
         self.unplayable_sides = unplayable_sides
@@ -69,8 +71,11 @@ class Tile:
         if self.unplayable_sides.__contains__(side):
             return TerrainType.UNPLAYABLE
 
-        if side == Side.CENTER and self.chapel_or_flowers:
-            return TerrainType.CHAPEL_OR_FLOWERS
+        if side == Side.CENTER and self.chapel:
+            return TerrainType.CHAPEL
+
+        if side == Side.CENTER and self.flowers:
+            return TerrainType.FLOWERS
 
         if self.get_river_ends().__contains__(side):
             return TerrainType.UNPLAYABLE
@@ -93,7 +98,8 @@ class Tile:
             "grass": list(map(lambda x: x.to_json(), self.grass)),
             "farms": list(map(lambda x: x.to_json(), self.farms)),
             "shield": self.shield,
-            "chapel_or_flowers": self.chapel_or_flowers,
+            "chapel": self.chapel,
+            "flowers": self.flowers,
             "inn": list(map(lambda x: x.to_json(), self.inn)),
             "unplayable_sides": list(map(lambda x: x.to_json(), self.unplayable_sides))
         }
@@ -111,7 +117,8 @@ class Tile:
             grass=list(map(lambda x: SideModificationUtil.turn_side(x, times), self.grass)),
             farms=list(map(lambda x: SideModificationUtil.turn_farmer_connection(x, times), self.farms)),
             shield=self.shield,
-            chapel_or_flowers=self.chapel_or_flowers,
+            chapel=self.chapel,
+            flowers=self.flowers,
             inn=list(map(lambda x: SideModificationUtil.turn_side(x, times), self.inn)),
             unplayable_sides=list(map(lambda x: SideModificationUtil.turn_side(x, times), self.unplayable_sides)),
             image=self.image

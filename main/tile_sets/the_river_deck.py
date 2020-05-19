@@ -1,3 +1,5 @@
+import os
+
 from main.objects.connection import Connection
 from main.objects.farmer_connection import FarmerConnection
 from main.objects.farmer_side import FarmerSide
@@ -27,7 +29,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_A.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_A.png")
     ),
     "river_city_with_road": Tile(
         description="river_city_with_road",
@@ -78,7 +80,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_B.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_B.png")
     ),
     "river_double_city": Tile(
         description="river_double_city",
@@ -112,7 +114,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_C.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_C.png")
     ),
     "river_straight": Tile(
         description="river_straight",
@@ -140,7 +142,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_D.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_D.png")
     ),
     "river_diagonal_city": Tile(
         description="river_diagonal_city",
@@ -171,7 +173,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_E.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_E.png")
     ),
     "river_straight_2": Tile(
         description="river_straight_2",
@@ -199,7 +201,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_F.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_F.png")
     ),
     "river_bend": Tile(
         description="river_bend",
@@ -227,7 +229,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_G.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_G.png")
     ),
     "river_chapel": Tile(
         description="river_chapel",
@@ -265,8 +267,8 @@ the_river_tiles = {
                 ]
             )
         ],
-        chapel_or_flowers=True,
-        image="River_III_C2_Tile_H.png"
+        chapel=True,
+        image=os.path.join("the_river", "River_III_C2_Tile_H.png")
     ),
     "river_bend_with_road": Tile(
         description="river_bend_with_road",
@@ -303,7 +305,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_I.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_I.png")
     ),
     "river_flowery_bend": Tile(
         description="river_flowery_bend",
@@ -331,8 +333,8 @@ the_river_tiles = {
                 ]
             )
         ],
-        chapel_or_flowers=True,
-        image="River_III_C2_Tile_J.png"
+        flowers=True,
+        image=os.path.join("the_river", "River_III_C2_Tile_J.png")
     ),
     "river_crossing": Tile(
         description="river_crossing",
@@ -376,7 +378,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_III_C2_Tile_K.png"
+        image=os.path.join("the_river", "River_III_C2_Tile_K.png")
     ),
     "river_end": Tile(
         description="river_end",
@@ -400,7 +402,7 @@ the_river_tiles = {
                 ]
             )
         ],
-        image="River_I_C2_Tile_L.jpg"
+        image=os.path.join("the_river", "River_I_C2_Tile_L.png")
     )
 }
 

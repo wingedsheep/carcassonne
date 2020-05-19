@@ -5,7 +5,8 @@ class TerrainType(Enum):
     CITY = "city"
     GRASS = "grass"
     ROAD = "road"
-    CHAPEL_OR_FLOWERS = "chapel_or_flowers"
+    CHAPEL = "chapel"
+    FLOWERS = "flowers"
     UNPLAYABLE = "unplayable"
 
     def to_json(self):

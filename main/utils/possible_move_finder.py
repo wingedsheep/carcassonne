@@ -50,7 +50,7 @@ class PossibleMoveFinder:
                 map(lambda x: MeepleAction(meeple_type=MeepleType.BIG_FARMER, coordinate_with_side=x), farmer_positions)))
 
         if game_state.abbots[current_player] > 0:
-            if last_played_tile.chapel_or_flowers:
+            if last_played_tile.chapel or last_played_tile.flowers:
                 possible_actions.append(MeepleAction(meeple_type=MeepleType.ABBOT,
                                                      coordinate_with_side=CoordinateWithSide(
                                                          coordinate=last_played_position, side=Side.CENTER)))
@@ -71,7 +71,7 @@ class PossibleMoveFinder:
         last_played_tile: Tile = last_tile_action.tile
         last_played_position: Coordinate = last_tile_action.coordinate
 
-        if last_played_tile.chapel_or_flowers:
+        if last_played_tile.chapel:
             playing_positions.append(CoordinateWithSide(coordinate=last_played_position, side=Side.CENTER))
 
         for side in [Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT]:
