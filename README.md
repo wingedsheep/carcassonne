@@ -9,6 +9,8 @@ Carcassonne implementation in python
     * Base game
     * The river
     * Inns and cathedrals
+* Abbots
+* Farmers
 
 ## API
 
