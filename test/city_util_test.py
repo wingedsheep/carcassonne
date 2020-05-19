@@ -1,8 +1,6 @@
 import unittest
 
 from main.carcassonne_game_state import CarcassonneGameState
-from main.carcassonne_visualiser import CarcassonneVisualiser
-from main.tile_sets import inns_and_cathedrals_deck
 from main.tile_sets.base_deck import base_tiles
 from main.tile_sets.inns_and_cathedrals_deck import inns_and_cathedrals_tiles
 from main.objects.city import City
@@ -24,7 +22,7 @@ class TestCityUtil(unittest.TestCase):
         # Given
         game_state: CarcassonneGameState = CarcassonneGameState()
 
-        city_top = base_tiles["city_one_side"]
+        city_top = base_tiles["city_top"]
         city_bottom = city_top.turn(2)
 
         game_state.board = [[None for column in range(1)] for row in range(2)]
@@ -138,7 +136,7 @@ class TestCityUtil(unittest.TestCase):
         # Given
         game_state: CarcassonneGameState = CarcassonneGameState()
 
-        city_one_side_straight_road = base_tiles["city_one_side_straight_road"].turn(3)
+        city_one_side_straight_road = base_tiles["city_top_straight_road"].turn(3)
         city_with_road = inns_and_cathedrals_tiles["ic_15"].turn(3)
 
         game_state.board = [[None for column in range(2)] for row in range(1)]

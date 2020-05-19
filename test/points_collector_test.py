@@ -21,7 +21,7 @@ class TestPointsCollector(unittest.TestCase):
         # Given
         game_state: CarcassonneGameState = CarcassonneGameState()
 
-        city_one_side_straight_road = base_tiles["city_one_side_straight_road"].turn(3)
+        city_one_side_straight_road = base_tiles["city_top_straight_road"].turn(3)
         city_with_road = inns_and_cathedrals_tiles["ic_15"].turn(3)
 
         game_state.board = [[None for column in range(2)] for row in range(1)]
@@ -52,7 +52,7 @@ class TestPointsCollector(unittest.TestCase):
         # Given
         game_state: CarcassonneGameState = CarcassonneGameState()
 
-        city_one_side_straight_road = base_tiles["city_one_side_straight_road"].turn(3)
+        city_one_side_straight_road = base_tiles["city_top_straight_road"].turn(3)
         city_with_road = inns_and_cathedrals_tiles["ic_15"].turn(3)
 
         game_state.board = [[None for column in range(2)] for row in range(1)]
