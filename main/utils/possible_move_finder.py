@@ -15,14 +15,11 @@ from main.utils.city_util import CityUtil
 from main.utils.farm_util import FarmUtil
 from main.utils.road_util import RoadUtil
 
-city_util: CityUtil = CityUtil()
-road_util: RoadUtil = RoadUtil()
-
 
 class PossibleMoveFinder:
 
-    @staticmethod
-    def possible_meeple_actions(game_state: CarcassonneGameState) -> [MeepleAction]:
+    @classmethod
+    def possible_meeple_actions(cls, game_state: CarcassonneGameState) -> [MeepleAction]:
         current_player = game_state.current_player
         last_tile_action: TileAction = game_state.last_tile_action
         last_played_tile: Tile = last_tile_action.tile
@@ -30,8 +27,8 @@ class PossibleMoveFinder:
 
         possible_actions: [MeepleAction] = []
 
-        meeple_positions = PossibleMoveFinder.__possible_meeple_positions(game_state=game_state)
-        farmer_positions = PossibleMoveFinder.__possible_farmer_position(game_state=game_state)
+        meeple_positions = cls.__possible_meeple_positions(game_state=game_state)
+        farmer_positions = cls.__possible_farmer_position(game_state=game_state)
 
         if game_state.meeples[current_player] > 0:
             possible_actions.extend(list(
@@ -74,21 +71,21 @@ class PossibleMoveFinder:
 
         for side in [Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT]:
             if last_played_tile.get_type(side) == TerrainType.CITY:
-                connected_cities = city_util.find_city(
+                connected_cities = CityUtil.find_city(
                     game_state,
                     CoordinateWithSide(coordinate=last_played_position, side=side)
                 )
-                if city_util.city_contains_meeples(game_state, connected_cities):
+                if CityUtil.city_contains_meeples(game_state, connected_cities):
                     continue
                 else:
                     playing_positions.append(CoordinateWithSide(coordinate=last_played_position, side=side))
 
             if last_played_tile.get_type(side) == TerrainType.ROAD:
-                connected_roads = road_util.find_road(
+                connected_roads = RoadUtil.find_road(
                     game_state,
                     CoordinateWithSide(coordinate=last_played_position, side=side)
                 )
-                if road_util.road_contains_meeples(game_state, connected_roads):
+                if RoadUtil.road_contains_meeples(game_state, connected_roads):
                     continue
                 else:
                     playing_positions.append(CoordinateWithSide(coordinate=last_played_position, side=side))

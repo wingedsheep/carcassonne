@@ -22,7 +22,6 @@ class TestCityUtil(unittest.TestCase):
         """
 
         # Given
-        city_util: CityUtil = CityUtil()
         game_state: CarcassonneGameState = CarcassonneGameState()
 
         city_top = base_tiles["city_one_side"]
@@ -34,7 +33,7 @@ class TestCityUtil(unittest.TestCase):
         game_state.board[1][0] = city_top
 
         # When
-        city: City = city_util.find_city(
+        city: City = CityUtil.find_city(
             game_state=game_state,
             city_position=CoordinateWithSide(Coordinate(0, 0), Side.BOTTOM)
         )
@@ -52,11 +51,10 @@ class TestCityUtil(unittest.TestCase):
         """
 
         # Given
-        city_util: CityUtil = CityUtil()
         game_state: CarcassonneGameState = self.create_donut_city_board()
 
         # When
-        city: City = city_util.find_city(
+        city: City = CityUtil.find_city(
             game_state=game_state,
             city_position=CoordinateWithSide(Coordinate(0, 0), Side.BOTTOM)
         )
@@ -87,7 +85,6 @@ class TestCityUtil(unittest.TestCase):
         """
 
         # Given
-        city_util: CityUtil = CityUtil()
         game_state: CarcassonneGameState = self.create_donut_city_board()
         game_state.placed_meeples = [[], [], []]
         game_state.placed_meeples[0].append(MeeplePosition(meeple_type=MeepleType.NORMAL, coordinate_with_side=CoordinateWithSide(Coordinate(2, 1), Side.RIGHT)))
@@ -96,12 +93,12 @@ class TestCityUtil(unittest.TestCase):
         game_state.players = 3
 
         # When
-        city: City = city_util.find_city(
+        city: City = CityUtil.find_city(
             game_state=game_state,
             city_position=CoordinateWithSide(Coordinate(0, 0), Side.BOTTOM)
         )
 
-        meeples: [[MeeplePosition]] = city_util.find_meeples(game_state, city)
+        meeples: [[MeeplePosition]] = CityUtil.find_meeples(game_state, city)
 
         # Then
         self.assertEqual(3, len(meeples))
@@ -139,7 +136,6 @@ class TestCityUtil(unittest.TestCase):
         """
 
         # Given
-        city_util: CityUtil = CityUtil()
         game_state: CarcassonneGameState = CarcassonneGameState()
 
         city_one_side_straight_road = base_tiles["city_one_side_straight_road"].turn(3)
@@ -151,7 +147,7 @@ class TestCityUtil(unittest.TestCase):
         game_state.board[0][1] = city_one_side_straight_road
 
         # When
-        cities: [City] = city_util.find_cities(
+        cities: [City] = CityUtil.find_cities(
             game_state=game_state,
             coordinate=Coordinate(0, 0)
         )

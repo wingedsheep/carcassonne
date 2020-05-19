@@ -4,24 +4,13 @@ from typing import Optional
 
 from main.objects.actions.tile_action import TileAction
 from main.objects.coordinate import Coordinate
+from main.objects.game_phase import GamePhase
 from main.tile_sets.base_deck import base_tile_counts, base_tiles
 from main.tile_sets.inns_and_cathedrals_deck import inns_and_cathedrals_tile_counts, inns_and_cathedrals_tiles
 from main.tile_sets.the_river_deck import the_river_tiles, the_river_tile_counts
-from main.objects.playing_position import PlayingPosition
 from main.objects.rotation import Rotation
 from main.objects.tile import Tile
 from main.tile_sets.tile_sets import TileSet
-
-
-class GamePhase(Enum):
-    TILES = "tiles"
-    MEEPLES = "meeples"
-
-    def to_json(self):
-        return self.value
-
-    def __str__(self):
-        return self.value
 
 
 class CarcassonneGameState:

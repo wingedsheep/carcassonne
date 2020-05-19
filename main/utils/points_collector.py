@@ -23,18 +23,14 @@ from main.utils.road_util import RoadUtil
 
 class PointsCollector:
 
-    def __init__(self, city_util: CityUtil, road_util: RoadUtil, meeple_util: MeepleUtil):
-        self.city_util = city_util
-        self.road_util = road_util
-        self.meeple_util = meeple_util
-
-    def remove_meeples_and_collect_points(self, game_state: CarcassonneGameState, coordinate: Coordinate):
+    @classmethod
+    def remove_meeples_and_collect_points(cls, game_state: CarcassonneGameState, coordinate: Coordinate):
 
         # Points for finished cities
-        cities: [City] = self.city_util.find_cities(game_state=game_state, coordinate=coordinate)
+        cities: [City] = CityUtil.find_cities(game_state=game_state, coordinate=coordinate)
         for city in cities:
             if city.finished:
-                meeples: [[MeeplePosition]] = self.city_util.find_meeples(game_state=game_state, city=city)
+                meeples: [[MeeplePosition]] = CityUtil.find_meeples(game_state=game_state, city=city)
                 meeple_counts_per_player = PointsCollector.get_meeple_counts_per_player(meeples)
                 print("City finished. Meeples:", json.dumps(meeple_counts_per_player))
                 if sum(meeple_counts_per_player) == 0:
@@ -44,13 +40,13 @@ class PointsCollector:
                     points = PointsCollector.count_city_points(game_state=game_state, city=city)
                     print(points, "points for player", winning_player)
                     game_state.scores[winning_player] += points
-                self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples)
+                MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples)
 
         # Points for finished roads
-        roads: [Road] = self.road_util.find_roads(game_state=game_state, coordinate=coordinate)
+        roads: [Road] = RoadUtil.find_roads(game_state=game_state, coordinate=coordinate)
         for road in roads:
             if road.finished:
-                meeples: [[MeeplePosition]] = self.road_util.find_meeples(game_state=game_state, road=road)
+                meeples: [[MeeplePosition]] = RoadUtil.find_meeples(game_state=game_state, road=road)
                 meeple_counts_per_player = PointsCollector.get_meeple_counts_per_player(meeples)
                 print("Road finished. Meeples:", json.dumps(meeple_counts_per_player))
                 if sum(meeple_counts_per_player) == 0:
@@ -60,7 +56,7 @@ class PointsCollector:
                     points = PointsCollector.count_road_points(game_state=game_state, road=road)
                     print(points, "points for player", winning_player)
                     game_state.scores[winning_player] += points
-                self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples)
+                MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples)
 
         # Points for finished chapels
         for row in range(coordinate.row - 1, coordinate.row + 2):
@@ -72,7 +68,7 @@ class PointsCollector:
 
                 coordinate = Coordinate(row=row, column=column)
                 coordinate_with_side = CoordinateWithSide(coordinate=coordinate, side=Side.CENTER)
-                meeple_of_player = self.meeple_util.position_contains_meeple(game_state=game_state,
+                meeple_of_player = MeepleUtil.position_contains_meeple(game_state=game_state,
                                                                              coordinate_with_side=coordinate_with_side)
                 if tile.chapel_or_flowers and meeple_of_player is not None:
                     points = PointsCollector.chapel_or_flowers_points(game_state=game_state, coordinate=coordinate)
@@ -86,7 +82,7 @@ class PointsCollector:
                             meeples_per_player.append([])
                         meeples_per_player[meeple_of_player].append(coordinate_with_side)
 
-                        self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples_per_player)
+                        MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples_per_player)
 
     @staticmethod
     def get_winning_player(meeple_counts_per_player: [int]):
@@ -183,9 +179,9 @@ class PointsCollector:
                 terrrain_type: TerrainType = tile.get_type(meeple_position.coordinate_with_side.side)
 
                 if terrrain_type == TerrainType.CITY:
-                    city: City = self.city_util.find_city(game_state=game_state,
+                    city: City = CityUtil.find_city(game_state=game_state,
                                                           city_position=meeple_position.coordinate_with_side)
-                    meeples: [CoordinateWithSide] = self.city_util.find_meeples(game_state=game_state, city=city)
+                    meeples: [CoordinateWithSide] = CityUtil.find_meeples(game_state=game_state, city=city)
                     meeple_counts_per_player = self.get_meeple_counts_per_player(meeples)
                     print("Collecting points for unfinished city. Meeples:", json.dumps(meeple_counts_per_player))
                     winning_player = self.get_winning_player(meeple_counts_per_player)
@@ -194,13 +190,13 @@ class PointsCollector:
                         print(points, "points for player", player)
                         game_state.scores[winning_player] += points
 
-                    self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples)
+                    MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples)
                     continue
 
                 if terrrain_type == TerrainType.ROAD:
-                    road: [Road] = self.road_util.find_road(game_state=game_state,
+                    road: [Road] = RoadUtil.find_road(game_state=game_state,
                                                             road_position=meeple_position.coordinate_with_side)
-                    meeples: [CoordinateWithSide] = self.road_util.find_meeples(game_state=game_state, road=road)
+                    meeples: [CoordinateWithSide] = RoadUtil.find_meeples(game_state=game_state, road=road)
                     meeple_counts_per_player = self.get_meeple_counts_per_player(meeples)
                     print("Collecting points for unfinished road. Meeples:", json.dumps(meeple_counts_per_player))
                     winning_player = self.get_winning_player(meeple_counts_per_player)
@@ -208,7 +204,7 @@ class PointsCollector:
                         points = self.count_road_points(game_state=game_state, road=road)
                         print(points, "points for player", player)
                         game_state.scores[winning_player] += points
-                    self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples)
+                    MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples)
                     continue
 
                 if terrrain_type == TerrainType.CHAPEL_OR_FLOWERS:
@@ -223,7 +219,7 @@ class PointsCollector:
                         meeples_per_player.append([])
                     meeples_per_player[player].append(meeple_position)
 
-                    self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples_per_player)
+                    MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples_per_player)
                     continue
 
                 if meeple_position.meeple_type == MeepleType.FARMER or meeple_position.meeple_type == MeepleType.BIG_FARMER:
@@ -236,7 +232,7 @@ class PointsCollector:
                         points = self.count_farm_points(game_state=game_state, farm=farm)
                         print(points, "points for player", winning_player)
                         game_state.scores[winning_player] += points
-                    self.meeple_util.remove_meeples(game_state=game_state, meeples=meeples)
+                    MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples)
                     continue
 
                 print("Collecting points for unknown type", terrrain_type)

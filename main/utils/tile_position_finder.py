@@ -2,7 +2,7 @@ from main.carcassonne_game_state import CarcassonneGameState
 from main.objects.coordinate import Coordinate
 from main.objects.playing_position import PlayingPosition
 from main.objects.tile import Tile
-from main.utils.tile_fitter import fits
+from main.utils.tile_fitter import TileFitter
 
 
 class TilePositionFinder:
@@ -40,7 +40,7 @@ class TilePositionFinder:
                     else:
                         right = game_state.board[row_index][column_index + 1]
 
-                    if fits(tile_to_play.turn(tile_turns), top=top, bottom=bottom, left=left, right=right, game_state=game_state):
+                    if TileFitter.fits(tile_to_play.turn(tile_turns), top=top, bottom=bottom, left=left, right=right, game_state=game_state):
                         playing_positions.append(PlayingPosition(coordinate=Coordinate(row=row_index, column=column_index), turns=tile_turns))
 
         return playing_positions
