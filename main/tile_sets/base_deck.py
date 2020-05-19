@@ -28,7 +28,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_A.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_A.png")
     ),
     "chapel": Tile(
         description="chapel",
@@ -50,13 +50,13 @@ base_tiles = {
             )
         ],
         chapel=True,
-        image=os.path.join("base_game", "Base_Game_C2_Tile_B.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_B.png")
     ),
     "full_city_with_shield": Tile(
         description="full_city_with_shield",
         city=[[Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT]],
         shield=True,
-        image=os.path.join("base_game", "Base_Game_C2_Tile_C.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_C.png")
     ),
     "city_top_straight_road": Tile(
         description="city_top_straight_road",
@@ -88,7 +88,7 @@ base_tiles = {
             )
         ],
         grass=[Side.BOTTOM],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_D.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_D.png")
     ),
     "city_top": Tile(
         description="city_top",
@@ -113,7 +113,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_E.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_E.png")
     ),
     "city_top_flowers": Tile(
         description="city_top_flowers",
@@ -174,7 +174,7 @@ base_tiles = {
             )
         ],
         shield=True,
-        image=os.path.join("base_game", "Base_Game_C2_Tile_F.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_F.png")
     ),
     "city_narrow": Tile(
         description="city_narrow",
@@ -208,7 +208,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_G.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_G.png")
     ),
     "city_left_right": Tile(
         description="city_left_right",
@@ -234,7 +234,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_H.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_H.png")
     ),
     "city_top_bottom_flowers": Tile(
         description="city_top_bottom_flowers",
@@ -286,7 +286,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_I.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_I.png")
     ),
     "city_top_left_flowers": Tile(
         description="city_top_left_flowers",
@@ -345,7 +345,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_J.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_J.png")
     ),
     "city_top_road_bend_left": Tile(
         description="city_top_road_bend_left",
@@ -378,7 +378,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_K.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_K.png")
     ),
     "city_top_crossroads": Tile(
         description="city_top_crossroads",
@@ -421,7 +421,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_L.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_L.png")
     ),
     "city_diagonal_top_right_shield": Tile(
         description="city_diagonal_top_right_shield",
@@ -446,7 +446,7 @@ base_tiles = {
             )
         ],
         shield=True,
-        image=os.path.join("base_game", "Base_Game_C2_Tile_M.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_M.png")
     ),
     "city_diagonal_top_right_shield_flowers": Tile(
         description="city_diagonal_top_right_shield_flowers",
@@ -496,7 +496,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_N.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_N.png")
     ),
     "city_diagonal_top_right_flowers": Tile(
         description="city_diagonal_top_right_flowers",
@@ -553,7 +553,7 @@ base_tiles = {
             )
         ],
         shield=True,
-        image=os.path.join("base_game", "Base_Game_C2_Tile_O.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_O.png")
     ),
     "city_diagonal_top_left_road": Tile(
         description="city_diagonal_top_left_shield_road",
@@ -584,7 +584,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_P.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_P.png")
     ),
     "city_bottom_grass_shield": Tile(
         description="city_bottom_grass_shield",
@@ -608,7 +608,7 @@ base_tiles = {
             )
         ],
         shield=True,
-        image=os.path.join("base_game", "Base_Game_C2_Tile_Q.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_Q.png")
     ),
     "city_bottom_grass": Tile(
         description="city_bottom_grass",
@@ -631,7 +631,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_R.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_R.png")
     ),
     "city_bottom_grass_flowers": Tile(
         description="city_bottom_grass_flowers",
@@ -690,7 +690,7 @@ base_tiles = {
             )
         ],
         shield=True,
-        image=os.path.join("base_game", "Base_Game_C2_Tile_S.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_S.png")
     ),
     "city_bottom_road": Tile(
         description="city_bottom_road",
@@ -724,7 +724,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_T.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_T.png")
     ),
     "straight_road": Tile(
         description="straight_road",
@@ -752,7 +752,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_U.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_U.png")
     ),
     "straight_road_flowers": Tile(
         description="straight_road_flowers",
@@ -809,7 +809,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_V.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_V.png")
     ),
     "bent_road_flowers": Tile(
         description="bent_road_flowers",
@@ -876,7 +876,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_W.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_W.png")
     ),
     "crossroads": Tile(
         description="crossroads",
@@ -920,7 +920,7 @@ base_tiles = {
                 ]
             )
         ],
-        image=os.path.join("base_game", "Base_Game_C2_Tile_X.jpg")
+        image=os.path.join("base_game", "Base_Game_C2_Tile_X.png")
     )
 }
 
