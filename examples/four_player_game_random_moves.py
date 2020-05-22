@@ -1,12 +1,11 @@
 import random
 from typing import Optional
 
-from main.carcassonne_game import CarcassonneGame
-from main.carcassonne_game_state import CarcassonneGameState
-from main.objects.actions.action import Action
-from main.objects.meeple_type import MeepleType
-from main.tile_sets.supplementary_rules import SupplementaryRule
-from main.tile_sets.tile_sets import TileSet
+from wingedsheep.carcassonne.carcassonne_game import CarcassonneGame
+from wingedsheep.carcassonne.carcassonne_game_state import CarcassonneGameState
+from wingedsheep.carcassonne.objects.actions.action import Action
+from wingedsheep.carcassonne.tile_sets.supplementary_rules import SupplementaryRule
+from wingedsheep.carcassonne.tile_sets.tile_sets import TileSet
 
 
 def print_state(carcassonne_game_state: CarcassonneGameState):
