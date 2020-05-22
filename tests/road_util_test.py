@@ -1,12 +1,12 @@
 import unittest
 
-from src.wingedsheep.carcassonne import CarcassonneGameState
-from src.wingedsheep.carcassonne import base_tiles
-from src.wingedsheep.carcassonne import Coordinate
-from src.wingedsheep.carcassonne import CoordinateWithSide
-from src.wingedsheep.carcassonne.objects.road import Road
-from src.wingedsheep.carcassonne.objects.side import Side
-from src.wingedsheep.carcassonne.utils import RoadUtil
+from wingedsheep.carcassonne.carcassonne_game_state import CarcassonneGameState
+from wingedsheep.carcassonne.objects.coordinate import Coordinate
+from wingedsheep.carcassonne.objects.coordinate_with_side import CoordinateWithSide
+from wingedsheep.carcassonne.objects.road import Road
+from wingedsheep.carcassonne.objects.side import Side
+from wingedsheep.carcassonne.tile_sets.base_deck import base_tiles
+from wingedsheep.carcassonne.utils.road_util import RoadUtil
 
 
 class TestRoadUtil(unittest.TestCase):

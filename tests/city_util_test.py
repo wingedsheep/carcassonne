@@ -1,15 +1,15 @@
 import unittest
 
-from src.wingedsheep.carcassonne import CarcassonneGameState
-from src.wingedsheep.carcassonne import base_tiles
-from src.wingedsheep.carcassonne import inns_and_cathedrals_tiles
-from src.wingedsheep.carcassonne.objects.city import City
-from src.wingedsheep.carcassonne import Coordinate
-from src.wingedsheep.carcassonne import CoordinateWithSide
-from src.wingedsheep.carcassonne.objects.meeple_position import MeeplePosition
-from src.wingedsheep.carcassonne.objects.meeple_type import MeepleType
-from src.wingedsheep.carcassonne.objects.side import Side
-from src.wingedsheep.carcassonne.utils import CityUtil
+from wingedsheep.carcassonne.carcassonne_game_state import CarcassonneGameState
+from wingedsheep.carcassonne.objects.city import City
+from wingedsheep.carcassonne.objects.coordinate import Coordinate
+from wingedsheep.carcassonne.objects.coordinate_with_side import CoordinateWithSide
+from wingedsheep.carcassonne.objects.meeple_position import MeeplePosition
+from wingedsheep.carcassonne.objects.meeple_type import MeepleType
+from wingedsheep.carcassonne.objects.side import Side
+from wingedsheep.carcassonne.tile_sets.base_deck import base_tiles
+from wingedsheep.carcassonne.tile_sets.inns_and_cathedrals_deck import inns_and_cathedrals_tiles
+from wingedsheep.carcassonne.utils.city_util import CityUtil
 
 
 class TestCityUtil(unittest.TestCase):
