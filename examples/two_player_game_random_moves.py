@@ -4,6 +4,7 @@ from typing import Optional
 from wingedsheep.carcassonne.carcassonne_game import CarcassonneGame
 from wingedsheep.carcassonne.carcassonne_game_state import CarcassonneGameState
 from wingedsheep.carcassonne.objects.actions.action import Action
+from wingedsheep.carcassonne.objects.meeple_type import MeepleType
 from wingedsheep.carcassonne.tile_sets.supplementary_rules import SupplementaryRule
 from wingedsheep.carcassonne.tile_sets.tile_sets import TileSet
 
