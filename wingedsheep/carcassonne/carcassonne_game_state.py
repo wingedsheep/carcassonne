@@ -30,11 +30,11 @@ class CarcassonneGameState:
         self.starting_position: Coordinate = starting_position
         self.next_tile = self.deck.pop(0)
         self.players = players
-        self.meeples = [7 for _ in range(players + 1)]
-        self.abbots = [1 if SupplementaryRule.ABBOTS in supplementary_rules else 0 for _ in range(players + 1)]
-        self.big_meeples = [1 if TileSet.INNS_AND_CATHEDRALS in tile_sets else 0 for _ in range(players + 1)]
-        self.placed_meeples = [[] for _ in range(players + 1)]
-        self.scores: [int] = [0 for _ in range(players + 1)]
+        self.meeples = [7 for _ in range(players)]
+        self.abbots = [1 if SupplementaryRule.ABBOTS in supplementary_rules else 0 for _ in range(players)]
+        self.big_meeples = [1 if TileSet.INNS_AND_CATHEDRALS in tile_sets else 0 for _ in range(players)]
+        self.placed_meeples = [[] for _ in range(players)]
+        self.scores: [int] = [0 for _ in range(players)]
         self.current_player = 0
         self.phase = GamePhase.TILES
         self.last_tile_action: Optional[TileAction] = None
