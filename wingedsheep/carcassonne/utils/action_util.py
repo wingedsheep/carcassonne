@@ -24,7 +24,8 @@ class ActionUtil:
                 for playing_position in possible_playing_positions:
                     action = TileAction(
                         tile=state.next_tile.turn(playing_position.turns),
-                        coordinate=playing_position.coordinate
+                        coordinate=playing_position.coordinate,
+                        tile_rotations=playing_position.turns
                     )
                     actions.append(action)
         elif state.phase == GamePhase.MEEPLES:
