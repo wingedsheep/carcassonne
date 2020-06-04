@@ -20,25 +20,10 @@ class TilePositionFinder:
                     continue
 
                 for tile_turns in range(0, 4):
-                    if row_index == 0:
-                        top = None
-                    else:
-                        top = game_state.board[row_index - 1][column_index]
-
-                    if row_index == len(game_state.board) - 1:
-                        bottom = None
-                    else:
-                        bottom = game_state.board[row_index + 1][column_index]
-
-                    if column_index == 0:
-                        left = None
-                    else:
-                        left = game_state.board[row_index][column_index - 1]
-
-                    if column_index == len(board_row) - 1:
-                        right = None
-                    else:
-                        right = game_state.board[row_index][column_index + 1]
+                    top = game_state.get_tile(row_index - 1, column_index)
+                    bottom = game_state.get_tile(row_index + 1, column_index)
+                    left = game_state.get_tile(row_index, column_index - 1)
+                    right = game_state.get_tile(row_index, column_index + 1)
 
                     if TileFitter.fits(tile_to_play.turn(tile_turns), top=top, bottom=bottom, left=left, right=right, game_state=game_state):
                         playing_positions.append(PlayingPosition(coordinate=Coordinate(row=row_index, column=column_index), turns=tile_turns))
