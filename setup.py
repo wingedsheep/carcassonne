@@ -1,7 +1,7 @@
 from setuptools import setup, find_namespace_packages
 
 setup(name='wingedsheep-carcassonne',
-      version='1.0.2',
+      version='1.0.3',
       description='Carcassonne implementation',
       author='Vincent Bons',
       url='https://github.com/wingedsheep/carcassonne',

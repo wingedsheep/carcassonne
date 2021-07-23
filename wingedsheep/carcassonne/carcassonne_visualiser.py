@@ -49,11 +49,11 @@ class CarcassonneVisualiser:
         self.canvas = Canvas(root, width=2300, height=1300, bg='white')
         self.canvas.pack(fill='both', expand=True)
         self.images_path = os.path.join(wingedsheep.__path__[0], 'carcassonne', 'resources', 'images')
-        self.image_ref = []
+        self.meeple_image_refs = {}
+        self.tile_image_refs = {}
 
     def draw_game_state(self, game_state: CarcassonneGameState):
         self.canvas.delete('all')
-        self.image_ref = []
         for row_index, row in enumerate(game_state.board):
             for column_index, tile in enumerate(row):
                 tile: Tile
@@ -68,8 +68,7 @@ class CarcassonneVisualiser:
         self.canvas.update()
 
     def __draw_meeple(self, player_index: int, meeple_position: MeeplePosition):
-        image = self.__get_image(player=player_index, meeple_type=meeple_position.meeple_type)
-        self.image_ref.append(image)
+        image = self.__get_meeple_image(player=player_index, meeple_type=meeple_position.meeple_type)
 
         if meeple_position.meeple_type == MeepleType.BIG:
             x = meeple_position.coordinate_with_side.coordinate.column * self.tile_size + self.big_meeple_position_offsets[meeple_position.coordinate_with_side.side][0]
@@ -87,18 +86,28 @@ class CarcassonneVisualiser:
 
     def __draw_tile(self, column_index, row_index, tile):
         image_filename = tile.image
-        abs_file_path = os.path.join(self.images_path, image_filename)
-        image = Image.open(abs_file_path).resize((self.tile_size, self.tile_size), Image.ANTIALIAS).rotate(-90 * tile.turns)
-        height = image.height
-        width = image.width
-        crop_width = max(0, width - height) / 2
-        crop_height = max(0, height - width) / 2
-        image.crop((crop_width, crop_height, crop_width, crop_height))
-        photo_image = ImageTk.PhotoImage(image)
-        self.image_ref.append(photo_image)
+        reference = f"{image_filename}_{str(tile.turns)}"
+        if reference in self.tile_image_refs:
+            photo_image = self.tile_image_refs[reference]
+        else:
+            abs_file_path = os.path.join(self.images_path, image_filename)
+            image = Image.open(abs_file_path).resize((self.tile_size, self.tile_size), Image.ANTIALIAS).rotate(
+                -90 * tile.turns)
+            height = image.height
+            width = image.width
+            crop_width = max(0, width - height) / 2
+            crop_height = max(0, height - width) / 2
+            image.crop((crop_width, crop_height, crop_width, crop_height))
+            photo_image = ImageTk.PhotoImage(image)
+        self.tile_image_refs[f"{image_filename}_{str(tile.turns)}"] = photo_image
         self.canvas.create_image(column_index * self.tile_size, row_index * self.tile_size, anchor=NW, image=photo_image)
 
-    def __get_image(self, player: int, meeple_type: MeepleType):
+    def __get_meeple_image(self, player: int, meeple_type: MeepleType):
+        reference = f"{str(player)}_{str(meeple_type)}"
+
+        if reference in self.meeple_image_refs:
+            return self.meeple_image_refs[reference]
+
         icon_type = MeepleType.NORMAL
         if meeple_type == MeepleType.ABBOT:
             icon_type = meeple_type
@@ -106,11 +115,18 @@ class CarcassonneVisualiser:
         image_filename = self.meeple_icons[icon_type][player]
         abs_file_path = os.path.join(self.images_path, image_filename)
 
+        photo_image = None
         if meeple_type == MeepleType.NORMAL or meeple_type == MeepleType.ABBOT:
-            return ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS))
+            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS))
         elif meeple_type == MeepleType.BIG:
-            return ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS))
+            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS))
         elif meeple_type == MeepleType.FARMER:
-            return ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS).rotate(-90))
+            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS).rotate(-90))
         elif meeple_type == MeepleType.BIG_FARMER:
-            return ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS).rotate(-90))
+            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS).rotate(-90))
+        else:
+            print(f"ERROR LOADING IMAGE {abs_file_path}!")
+            exit(1)
+
+        self.meeple_image_refs[f"{str(player)}_{str(meeple_type)}"] = photo_image
+        return photo_image
