@@ -84,6 +84,29 @@ class CarcassonneVisualiser:
             image=image
         )
 
+    def __flattenAlpha(self, img):
+        alpha = img.split()[-1]  # Pull off the alpha layer
+        ab = alpha.tobytes()  # Original 8-bit alpha
+
+        checked = []  # Create a new array to store the cleaned up alpha layer bytes
+
+        # Walk through all pixels and set them either to 0 for transparent or 255 for opaque fancy pants
+        transparent = 50  # change to suit your tolerance for what is and is not transparent
+
+        p = 0
+        for pixel in range(0, len(ab)):
+            if ab[pixel] < transparent:
+                checked.append(0)  # Transparent
+            else:
+                checked.append(255)  # Opaque
+            p += 1
+
+        mask = Image.frombytes('L', img.size, bytes(checked))
+
+        img.putalpha(mask)
+
+        return img
+
     def __draw_tile(self, column_index, row_index, tile):
         image_filename = tile.image
         reference = f"{image_filename}_{str(tile.turns)}"
@@ -93,6 +116,7 @@ class CarcassonneVisualiser:
             abs_file_path = os.path.join(self.images_path, image_filename)
             image = Image.open(abs_file_path).resize((self.tile_size, self.tile_size), Image.ANTIALIAS).rotate(
                 -90 * tile.turns)
+            image = self.__flattenAlpha(image)
             height = image.height
             width = image.width
             crop_width = max(0, width - height) / 2
@@ -117,13 +141,21 @@ class CarcassonneVisualiser:
 
         photo_image = None
         if meeple_type == MeepleType.NORMAL or meeple_type == MeepleType.ABBOT:
-            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS))
+            image = Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS)
+            image = self.__flattenAlpha(image)
+            photo_image = ImageTk.PhotoImage(image)
         elif meeple_type == MeepleType.BIG:
-            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS))
+            image = Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS)
+            image = self.__flattenAlpha(image)
+            photo_image = ImageTk.PhotoImage(image)
         elif meeple_type == MeepleType.FARMER:
-            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS).rotate(-90))
+            image = Image.open(abs_file_path).resize((self.meeple_size, self.meeple_size), Image.ANTIALIAS).rotate(-90)
+            image = self.__flattenAlpha(image)
+            photo_image = ImageTk.PhotoImage(image)
         elif meeple_type == MeepleType.BIG_FARMER:
-            photo_image = ImageTk.PhotoImage(Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS).rotate(-90))
+            image = Image.open(abs_file_path).resize((self.big_meeple_size, self.big_meeple_size), Image.ANTIALIAS).rotate(-90)
+            image = self.__flattenAlpha(image)
+            photo_image = ImageTk.PhotoImage(image)
         else:
             print(f"ERROR LOADING IMAGE {abs_file_path}!")
             exit(1)
