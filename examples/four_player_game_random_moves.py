@@ -59,3 +59,4 @@ while not game.is_finished():
     game.render()
 
 print_state(carcassonne_game_state=game.state)
+input("Press Enter to continue...")
