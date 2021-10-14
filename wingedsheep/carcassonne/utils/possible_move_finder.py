@@ -74,6 +74,10 @@ class PossibleMoveFinder:
         if last_played_tile.chapel:
             playing_positions.append(CoordinateWithSide(coordinate=last_played_position, side=Side.CENTER))
 
+        if last_played_tile.flowers \
+                and SupplementaryRule.NORMAL_MEEPLES_CAN_USE_FLOWERS in game_state.supplementary_rules:
+            playing_positions.append(CoordinateWithSide(coordinate=last_played_position, side=Side.CENTER))
+
         for side in [Side.TOP, Side.RIGHT, Side.BOTTOM, Side.LEFT]:
             if last_played_tile.get_type(side) == TerrainType.CITY:
                 connected_cities = CityUtil.find_city(

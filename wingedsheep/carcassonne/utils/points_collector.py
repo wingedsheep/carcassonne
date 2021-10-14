@@ -80,7 +80,10 @@ class PointsCollector:
                         meeples_per_player = []
                         for _ in range(game_state.players):
                             meeples_per_player.append([])
-                        meeples_per_player[meeple_of_player].append(coordinate_with_side)
+
+                        for meeple_position in game_state.placed_meeples[meeple_of_player]:
+                            if coordinate_with_side == meeple_position.coordinate_with_side:
+                                meeples_per_player[meeple_of_player].append(meeple_position)
 
                         MeepleUtil.remove_meeples(game_state=game_state, meeples=meeples_per_player)
 
